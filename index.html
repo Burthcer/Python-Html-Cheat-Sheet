@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Python Cheat Sheet Central</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>Python Cheat Sheet Central</h1>
+            <div class="theme-switch-wrapper">
+                <button class="theme-btn" onclick="setTheme('teal')">Teal</button>
+                <button class="theme-btn" onclick="setTheme('light')">Light</button>
+                <button class="theme-btn" onclick="setTheme('dark')">Dark</button>
+            </div>
+        </header>
+
+        <div class="grid">
+            <a href="pages/1. Beginner's Python Cheat Sheet.html" class="card">1. Beginner's Python Cheat Sheet</a>
+            <a href="pages/2. Lists.html" class="card">2. Lists</a>
+            <a href="pages/3. Dictionaries.html" class="card">3. Dictionaries</a>
+            <a href="pages/4. If Statements & While Loops.html" class="card">4. If Statements & While Loops</a>
+            <a href="pages/5. Functions & Modules.html" class="card">5. Functions & Modules</a>
+            <a href="pages/6. Classes.html" class="card">6. Classes</a>
+            <a href="pages/7. Files and Exceptions.html" class="card">7. Files and Exceptions</a>
+            <a href="pages/8. Testing Your Code.html" class="card">8. Testing Your Code</a>
+            <a href="pages/9. Pygame.html" class="card">9. Pygame</a>
+            <a href="pages/10. Matplotlib.html" class="card">10. Matplotlib</a>
+            <a href="pages/11. Plotly.html" class="card">11. Plotly</a>
+            <a href="pages/12. Django.html" class="card">12. Django</a>
+            <a href="pages/13. Django, Part 2.html" class="card">13. Django, Part 2</a>
+            <a href="pages/14. Git & GitHub.html" class="card">14. Git & GitHub</a>
+        </div>
+    </div>
+
+    <script src="assets/theme.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+</script>
+<link rel="manifest" href="manifest.json">
+</body>
+</html>

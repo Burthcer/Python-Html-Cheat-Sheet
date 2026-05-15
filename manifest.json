@@ -1,0 +1,15 @@
+{
+  "name": "Python Crash Course Cheat Sheet",
+  "short_name": "PythonCheat",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#4b887a",
+  "theme_color": "#4b887a",
+  "icons": [
+    {
+      "src": "assets/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

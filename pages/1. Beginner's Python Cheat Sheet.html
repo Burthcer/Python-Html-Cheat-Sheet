@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginner's Python Cheat Sheet - SPA</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+    <aside>
+        <a href="../index.html" class="back-btn">← Back to Dashboard</a>
+        <h1>Python Cheat Sheet</h1>
+        <button id="show-all-btn">Show All Content</button>
+        <nav>
+            <ul id="nav-list">
+                <li data-target="vars">Variables and Strings</li>
+                <li data-target="lists">Lists</li>
+                <li data-target="tuples">Tuples</li>
+                <li data-target="if-statements">If statements</li>
+                <li data-target="dictionaries">Dictionaries</li>
+                <li data-target="user-input">User input</li>
+                <li data-target="while-loops">While loops</li>
+                <li data-target="functions">Functions</li>
+                <li data-target="classes">Classes</li>
+                <li data-target="files">Working with files</li>
+                <li data-target="exceptions">Exceptions</li>
+                <li data-target="infinite-skills">Infinite Skills</li>
+                <li data-target="zen">Zen of Python</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main id="content-area">
+
+        <!-- VARIABLES AND STRINGS -->
+        <section id="vars" class="visible">
+            <h2 class="main-topic-header">Variables and Strings</h2>
+            <p class="intro-text">Variables are used to assign labels to values. A string is a series of characters, surrounded by single or double quotes. Python's f-strings allow you to use variables inside strings to build dynamic messages.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Hello world</h3>
+                <pre>print("Hello world!")</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Hello world with a variable</h3>
+                <pre>msg = "Hello world!"
+print(msg)</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">f-strings (using variables in strings)</h3>
+                <pre>first_name = 'albert'
+last_name = 'einstein'
+full_name = f"{first_name} {last_name}"
+print(full_name)</pre>
+            </div>
+        </section>
+
+        <!-- LISTS -->
+        <section id="lists">
+            <h2 class="main-topic-header">Lists</h2>
+            <p class="intro-text">A list stores a series of items in a particular order. You access items using an index, or within a loop.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Make a list</h3>
+                <pre>bikes = ['trek', 'redline', 'giant']</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Get the first item in a list</h3>
+                <pre>first_bike = bikes[0]</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Get the last item in a list</h3>
+                <pre>last_bike = bikes[-1]</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Looping through a list</h3>
+                <pre>for bike in bikes:
+    print(bike)</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Adding items to a list</h3>
+                <pre>bikes = []
+bikes.append('trek')
+bikes.append('redline')
+bikes.append('giant')</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Making numerical lists</h3>
+                <pre>squares = []
+for x in range(1, 11):
+    squares.append(x**2)</pre>
+            </div>
+
+            <h2 class="main-topic-header" style="margin-top:40px;">Lists (cont.)</h2>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">List comprehensions</h3>
+                <pre>squares = [x**2 for x in range(1, 11)]</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Slicing a list</h3>
+                <pre>finishers = ['sam', 'bob', 'ada', 'bea']
+first_two = finishers[:2]</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Copying a list</h3>
+                <pre>copy_of_bikes = bikes[:]</pre>
+            </div>
+        </section>
+
+        <!-- TUPLES -->
+        <section id="tuples">
+            <h2 class="main-topic-header">Tuples</h2>
+            <p class="intro-text">Tuples are similar to lists, but the items in a tuple can't be modified.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Making a tuple</h3>
+                <pre>dimensions = (1920, 1080)
+resolutions = ('720p', '1080p', '4K')</pre>
+            </div>
+        </section>
+
+        <!-- IF STATEMENTS -->
+        <section id="if-statements">
+            <h2 class="main-topic-header">If statements</h2>
+            <p class="intro-text">If statements are used to test for particular conditions and respond appropriately.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Conditional tests</h3>
+                <div class="grid-conditional">
+                    <span>equal</span><span>x == 42</span>
+                    <span>not equal</span><span>x != 42</span>
+                    <span>greater than</span><span>x > 42</span>
+                    <span>or equal to</span><span>x >= 42</span>
+                    <span>less than</span><span>x < 42</span>
+                    <span>or equal to</span><span>x <= 42</span>
+                </div>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Conditional tests with lists</h3>
+                <pre>'trek' in bikes
+'surly' not in bikes</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Assigning boolean values</h3>
+                <pre>game_active = True
+can_edit = False</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">A simple if test</h3>
+                <pre>if age >= 18:
+    print("You can vote!")</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">If-elif-else statements</h3>
+                <pre>if age < 4:
+    ticket_price = 0
+elif age < 18:
+    ticket_price = 10
+elif age < 65:
+    ticket_price = 40
+else:
+    ticket_price = 15</pre>
+            </div>
+        </section>
+
+        <!-- DICTIONARIES -->
+        <section id="dictionaries">
+            <h2 class="main-topic-header">Dictionaries</h2>
+            <p class="intro-text">Dictionaries store connections between pieces of information. Each item in a dictionary is a key-value pair.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">A simple dictionary</h3>
+                <pre>alien = {'color': 'green', 'points': 5}</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Accessing a value</h3>
+                <pre>print(f"The alien's color is {alien['color']}. ")</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Adding a new key-value pair</h3>
+                <pre>alien['x_position'] = 0</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Looping through all key-value pairs</h3>
+                <pre>fav_numbers = {'eric': 7, 'ever': 4, 'erin': 47}
+
+for name, number in fav_numbers.items():
+    print(f"{name} loves {number}. ")</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Looping through all keys</h3>
+                <pre>for name in fav_numbers.keys():
+    print(f"{name} loves a number.")</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Looping through all the values</h3>
+                <pre>for number in fav_numbers.values():
+    print(f"{number} is a favorite.")</pre>
+            </div>
+        </section>
+
+        <!-- USER INPUT -->
+        <section id="user-input">
+            <h2 class="main-topic-header">User input</h2>
+            <p class="intro-text">Your programs can prompt the user for input. All input is stored as a string.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Prompting for a value</h3>
+                <pre>name = input("What's your name? ")
+print(f"Hello, {name}!")</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Prompting for numerical input</h3>
+                <pre>age = input("How old are you? ")
+age = int(age)
+
+pi = input("What's the value of pi? ")
+pi = float(pi)</pre>
+            </div>
+        </section>
+
+        <!-- WHILE LOOPS -->
+        <section id="while-loops">
+            <h2 class="main-topic-header">While loops</h2>
+            <p class="intro-text">A while loop repeats a block of code as long as a certain condition is true. While loops are especially useful when you can't know ahead of time how many times a loop should run.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">A simple while loop</h3>
+                <pre>current_value = 1
+while current_value <= 5:
+    print(current_value)
+    current_value += 1</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Letting the user choose when to quit</h3>
+                <pre>msg = ''
+while msg != 'quit':
+    msg = input("What's your message? ")
+    
+    if msg != 'quit':
+        print(msg)</pre>
+            </div>
+        </section>
+
+        <!-- FUNCTIONS -->
+        <section id="functions">
+            <h2 class="main-topic-header">Functions</h2>
+            <p class="intro-text">Functions are named blocks of code, designed to do one specific job. Information passed to a function is called an argument, and information received by a function is called a parameter.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">A simple function</h3>
+                <pre>def greet_user():
+    """Display a simple greeting."""
+    print("Hello!")
+
+greet_user()</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Passing an argument</h3>
+                <pre>def greet_user(username):
+    """Display a personalized greeting."""
+    print(f"Hello, {username}!")
+
+greet_user('jesse')</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Default values for parameters</h3>
+                <pre>def make_pizza(topping='pineapple'):
+    """Make a single-topping pizza."""
+    print(f"Have a {topping} pizza!")
+
+make_pizza()
+make_pizza('mushroom')</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Returning a value</h3>
+                <pre>def add_numbers(x, y):
+    """Add two numbers and return the sum."""
+    return x + y
+
+sum = add_numbers(3, 5)
+print(sum)</pre>
+            </div>
+        </section>
+
+        <!-- CLASSES -->
+        <section id="classes">
+            <h2 class="main-topic-header">Classes</h2>
+            <p class="intro-text">A class defines the behavior of an object and the kind of information an object can store. The information in a class is stored in attributes, and functions that belong to a class are called methods. A child class inherits the attributes and methods from its parent class.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Creating a dog class</h3>
+                <pre>class Dog:
+    """Represent a dog."""
+
+    def __init__(self, name):
+        """Initialize dog object."""
+        self.name = name
+
+    def sit(self):
+        """Simulate sitting."""
+        print(f"{self.name} is sitting.")
+
+my_dog = Dog('Peso')
+print(f"{my_dog.name} is a great dog!")
+my_dog.sit()</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Inheritance</h3>
+                <pre>class SARDog(Dog):
+    """Represent a search dog."""
+
+    def __init__(self, name):
+        """Initialize the sardog."""
+        super().__init__(name)
+
+    def search(self):
+        """Simulate searching."""
+        print(f"{self.name} is searching.")
+
+my_dog = SARDog('Willie')
+print(f"{my_dog.name} is a search dog.")
+my_dog.sit()
+my_dog.search()</pre>
+            </div>
+        </section>
+
+        <!-- WORKING WITH FILES -->
+        <section id="files">
+            <h2 class="main-topic-header">Working with files</h2>
+            <p class="intro-text">Your programs can read from files and write to files. The pathlib library makes it easier to work with files and directories. Once you have a path defined, you can work with the read_text() and write_text() methods.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Reading the contents of a file</h3>
+                <p class="description">The read_text() method reads in the entire contents of a file. You can then split the text into a list of individual lines, and then process each line as you need to.</p>
+                <pre>from pathlib import Path
+
+path = Path('siddhartha.txt')
+contents = path.read_text()
+lines = contents.splitlines()
+
+for line in lines:
+    print(line)</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Writing to a file</h3>
+                <pre>path = Path('journal.txt')
+
+msg = "I love programming."
+path.write_text(msg)</pre>
+            </div>
+        </section>
+
+        <!-- EXCEPTIONS -->
+        <section id="exceptions">
+            <h2 class="main-topic-header">Exceptions</h2>
+            <p class="intro-text">Exceptions help you respond appropriately to errors that are likely to occur. You place code that might cause an error in the try block. Code that should run in response to an error goes in the except block. Code that should run only if the try block was successful goes in the else block.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Catching an exception</h3>
+                <pre>prompt = "How many tickets do you need? "
+num_tickets = input(prompt)
+
+try:
+    num_tickets = int(num_tickets)
+except ValueError:
+    print("Please try again.")
+else:
+    print("Your tickets are printing.")</pre>
+            </div>
+        </section>
+
+        <!-- INFINITE SKILLS -->
+        <section id="infinite-skills">
+            <h2 class="main-topic-header">Infinite Skills</h2>
+            <p class="intro-text">If you had infinite programming skills, what would you build?</p>
+            <div class="info-box">
+                <p>As you're learning to program, it's helpful to think about the real-world projects you'd like to create. It's a good habit to keep an "ideas" notebook that you can refer to whenever you want to start a new project.</p>
+                <p style="margin-top:15px;">If you haven't done so already, take a few minutes and describe three projects you'd like to create. As you're learning you can write small programs that relate to these ideas, so you can get practice writing code relevant to topics you're interested in.</p>
+            </div>
+        </section>
+
+        <!-- ZEN OF PYTHON -->
+        <section id="zen">
+            <h2 class="main-topic-header">Zen of Python</h2>
+            <p class="intro-text">Simple is better than complex</p>
+            <div class="info-box">
+                <p>If you have a choice between a simple and a complex solution, and both work, use the simple solution. Your code will be easier to maintain, and it will be easier for you and others to build on that code later on.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('#nav-list li');
+            const sections = document.querySelectorAll('main section');
+            const showAllBtn = document.getElementById('show-all-btn');
+
+            // Handle Navigation clicks
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const targetId = item.getAttribute('data-target');
+                    
+                    // Update Active Class on Nav
+                    navItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+
+                    // Show Only Selected Section
+                    sections.forEach(section => {
+                        if (section.id === targetId) {
+                            section.classList.add('visible');
+                        } else {
+                            section.classList.remove('visible');
+                        }
+                    });
+
+                    // Scroll to top of content
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            // Handle Show All logic
+            showAllBtn.addEventListener('click', () => {
+                navItems.forEach(i => i.classList.remove('active'));
+                sections.forEach(section => {
+                    section.classList.add('visible');
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+    <script src="../assets/theme.js"></script>
+    <script>
+        // ... Your existing sidebar logic remains here ...
+    </script>
+</body>
+</body>
+</html>

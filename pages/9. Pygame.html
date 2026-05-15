@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginner's Python Cheat Sheet - Pygame SPA</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+    <aside>
+        <a href="../index.html" class="back-btn">← Back to Dashboard</a>
+        <h1>Pygame Cheat Sheet</h1>
+        <button id="show-all-btn">Show All Content</button>
+        <nav>
+            <ul id="nav-list">
+                <li data-target="what-is" class="active">What is Pygame?</li>
+                <li data-target="installing">Installing Pygame</li>
+                <li data-target="starting">Starting a game</li>
+                <li data-target="rects">Pygame rect objects</li>
+                <li data-target="images">Working with images</li>
+                <li data-target="keyboard">Responding to keyboard input</li>
+                <li data-target="game-object">The game is an object</li>
+                <li data-target="docs">Pygame documentation</li>
+                <li data-target="mouse">Responding to mouse events</li>
+                <li data-target="groups">Pygame groups</li>
+                <li data-target="collisions">Detecting collisions</li>
+                <li data-target="text">Rendering text</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main id="content-area">
+
+        <!-- WHAT IS PYGAME -->
+        <section id="what-is" class="visible">
+            <h2 class="main-topic-header">What is Pygame?</h2>
+            <p>Pygame is a framework for making games using Python. Making games is fun, and it’s a great way to expand your programming skills and knowledge. Pygame takes care of many of the lower-level tasks in building games, which lets you focus on the aspects of your game that make it interesting.</p>
+        </section>
+
+        <!-- INSTALLING PYGAME -->
+        <section id="installing">
+            <h2 class="main-topic-header">Installing Pygame</h2>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Installing Pygame with pip</h3>
+                <pre>$ python -m pip install --user pygame</pre>
+            </div>
+        </section>
+
+        <!-- STARTING A GAME -->
+        <section id="starting">
+            <h2 class="main-topic-header">Starting a game</h2>
+            <p class="intro-text">The following code sets up an empty game window, and starts an event loop and a loop that continually refreshes the screen.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">An empty game window</h3>
+                <pre>import sys
+import pygame
+
+class AlienInvasion:
+    """Overall class to manage the game."""
+
+    def __init__(self):
+        pygame.init()
+        self.clock = pygame.time.Clock()
+        self.screen = pygame.display.set_mode(
+                (1200, 800))
+        pygame.display.set_caption(
+                "Alien Invasion")
+
+    def run_game(self):
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    sys.exit()
+
+            pygame.display.flip()
+            self.clock.tick(60)
+
+if __name__ == '__main__':
+    # Make a game instance, and run the game.
+    ai = AlienInvasion()
+    ai.run_game()</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Setting a custom window size</h3>
+                <p class="intro-text">The display.set_mode() function accepts a tuple that defines the screen size.</p>
+                <pre>screen_dim = (1500, 1000)
+self.screen = pygame.display.set_mode(
+        screen_dim)</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Setting a custom background color</h3>
+                <p class="intro-text">Colors are defined as a tuple of red, green, and blue values. Each value ranges from 0-255. The fill() method fills the screen with the color you specify, and should be called before you add any other elements to the screen.</p>
+                <pre>def __init__(self):
+    --snip--
+    self.bg_color = (225, 225, 225)
+
+def run_game(self):
+    while True:
+        for event in pygame.event.get():
+            --snip--
+
+        self.screen.fill(self.bg_color)
+        pygame.display.flip()</pre>
+            </div>
+        </section>
+
+        <!-- PYGAME RECT OBJECTS -->
+        <section id="rects">
+            <h2 class="main-topic-header">Pygame rect objects</h2>
+            <p class="intro-text">Many objects in a game can be treated as simple rectangles, rather than their actual shape. This simplifies code without noticeably affecting game play. Pygame has a rect object that makes it easy to work with game objects.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Getting the screen rect object</h3>
+                <p class="intro-text">We already have a screen object; we can easily access the rect object associated with the screen.</p>
+                <pre>self.screen_rect = self.screen.get_rect()</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Finding the center of the screen</h3>
+                <p class="intro-text">Rect objects have a center attribute which stores the center point.</p>
+                <pre>screen_center = self.screen_rect.center</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Useful rect attributes</h3>
+                <p class="intro-text">Once you have a rect object, there are a number of attributes that are useful when positioning objects and detecting relative positions of objects. (You can find more attributes in the Pygame documentation. The self variable has been left off for clarity.)</p>
+                <div class="list-block">
+                    <strong># Individual x and y values:</strong><br>
+                    screen_rect.left, screen_rect.right<br>
+                    screen_rect.top, screen_rect.bottom<br>
+                    screen_rect.centerx, screen_rect.centery<br>
+                    screen_rect.width, screen_rect.height<br><br>
+                    <strong># Tuples</strong><br>
+                    screen_rect.center<br>
+                    screen_rect.size
+                </div>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Creating a rect object</h3>
+                <p class="intro-text">You can create a rect object from scratch. For example a small rect object that's filled in can represent a bullet in a game. The Rect() class takes the coordinates of the upper left corner, and the width and height of the rect. The draw.rect() function takes a screen object, a color, and a rect. This function fills the given rect with the given color.</p>
+                <pre>bullet_rect = pygame.Rect(100, 100, 3, 15)
+color = (100, 100, 100)
+
+pygame.draw.rect(screen, color, bullet_rect)</pre>
+            </div>
+        </section>
+
+        <!-- WORKING WITH IMAGES -->
+        <section id="images">
+            <h2 class="main-topic-header">Working with images</h2>
+            <p class="intro-text">Many objects in a game are images that are moved around the screen. It's easiest to use bitmap (.bmp) image files, but you can also configure your system to work with jpg, png, and gif files as well.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Loading an image</h3>
+                <pre>ship = pygame.image.load('images/ship.bmp')</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Getting the rect object from an image</h3>
+                <pre>ship_rect = ship.get_rect()</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Positioning an image</h3>
+                <p class="intro-text">With rects, it's easy to position an image wherever you want on the screen, or in relation to another object. The following code positions a ship at the bottom center of the screen, by matching the midbottom of the ship with the midbottom of the screen.</p>
+                <pre>ship_rect.midbottom = screen_rect.midbottom</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Drawing an image to the screen</h3>
+                <p class="intro-text">Once an image is loaded and positioned, you can draw it to the screen with the blit() method. The blit() method acts on the screen object, and takes the image object and image rect as arguments.</p>
+                <pre># Draw ship to screen.
+screen.blit(ship, ship_rect)</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Transforming an image</h3>
+                <p class="intro-text">The transform module allows you to make changes to an image such as rotation and scaling.</p>
+                <pre>rotated_image = pygame.transform.rotate(
+        ship.image, 45)</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">The blit() method</h3>
+                <p class="intro-text">Game objects such as ships are often written as classes. Then a blitme() method is usually defined, which draws the object to the screen.</p>
+                <pre>def blitme(self):
+    """Draw ship at current location."""
+    self.screen.blit(self.image, self.rect)</pre>
+            </div>
+        </section>
+
+        <!-- RESPONDING TO KEYBOARD INPUT -->
+        <section id="keyboard">
+            <h2 class="main-topic-header">Responding to keyboard input</h2>
+            <p class="intro-text">Pygame watches for events such as key presses and mouse actions. You can detect any event you care about in the event loop, and respond with any action that's appropriate for your game.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Responding to key presses</h3>
+                <p class="intro-text">Pygame's main event loop registers a KEYDOWN event any time a key is pressed. When this happens, you can check for specific keys.</p>
+                <pre>for event in pygame.event.get():
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_RIGHT:
+            ship_rect.x += 1
+        elif event.key == pygame.K_LEFT:
+            ship_rect.x -= 1
+        elif event.key == pygame.K_SPACE:
+            ship.fire_bullet()
+        elif event.key == pygame.K_q:
+            sys.exit()</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Responding to released keys</h3>
+                <p class="intro-text">When the user releases a key, a KEYUP event is triggered.</p>
+                <pre>for event in pygame.event.get():
+    if event.type == pygame.KEYUP:
+        if event.key == pygame.K_RIGHT:
+            ship.moving_right = False</pre>
+            </div>
+        </section>
+
+        <!-- THE GAME IS AN OBJECT -->
+        <section id="game-object">
+            <h2 class="main-topic-header">The game is an object</h2>
+            <p class="intro-text">In the overall structure shown here (under Starting a Game), the entire game is written as a class. This makes it possible to write programs that play the game automatically, and it also means you can build an arcade with a collection of games.</p>
+        </section>
+
+        <!-- PYGAME DOCUMENTATION -->
+        <section id="docs">
+            <h2 class="main-topic-header">Pygame documentation</h2>
+            <p class="intro-text">The Pygame documentation is really helpful when building your own games. The home page for the Pygame project is at pygame.org/, and the home page for the documentation is at pygame.org/docs/.
+            <br>The most useful part of the documentation are the pages about specific parts of Pygame, such as the Rect() class and the sprite module. You can find a list of these elements at the top of the help pages.</p>
+        </section>
+
+        <!-- RESPONDING TO MOUSE EVENTS -->
+        <section id="mouse">
+            <h2 class="main-topic-header">Responding to mouse events</h2>
+            <p class="intro-text">Pygame's event loop registers an event any time the mouse moves, or a mouse button is pressed or released.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Responding to the mouse button</h3>
+                <pre>for event in pygame.event.get():
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        ship.fire_bullet()</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Finding the mouse position</h3>
+                <p class="intro-text">The mouse position is returned as a tuple.</p>
+                <pre>mouse_pos = pygame.mouse.get_pos()</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Clicking a button</h3>
+                <p class="intro-text">You might want to know if the cursor is over an object such as a button. The rect.collidepoint() method returns True when a point overlaps a rect object.</p>
+                <pre>if button_rect.collidepoint(mouse_pos):
+    start_game()</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Hiding the mouse</h3>
+                <pre>pygame.mouse.set_visible(False)</pre>
+            </div>
+        </section>
+
+        <!-- PYGAME GROUPS -->
+        <section id="groups">
+            <h2 class="main-topic-header">Pygame groups</h2>
+            <p class="intro-text">Pygame has a Group class which makes working with a group of similar objects easier. A group is like a list, with some extra functionality that's helpful when building games.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Making and filling a group</h3>
+                <p class="intro-text">An object that will be placed in a group must inherit from Sprite.</p>
+                <pre>from pygame.sprite import Sprite, Group
+
+class Bullet(Sprite):
+    ...
+    def draw_bullet(self):
+        ...
+    def update(self):
+        ...
+
+bullets = Group()
+
+new_bullet = Bullet()
+bullets.add(new_bullet)</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Looping through the items in a group</h3>
+                <p class="intro-text">The sprites() method returns all the members of a group.</p>
+                <pre>for bullet in bullets.sprites():
+    bullet.draw_bullet()</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Calling update() on a group</h3>
+                <p class="intro-text">Calling update() on a group automatically calls update() on each member of the group.</p>
+                <pre>bullets.update()</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Removing an item from a group</h3>
+                <p class="intro-text">It's important to delete elements that will never appear again in the game, so you don't waste memory and resources.</p>
+                <pre>bullets.remove(bullet)</pre>
+            </div>
+        </section>
+
+        <!-- DETECTING COLLISIONS -->
+        <section id="collisions">
+            <h2 class="main-topic-header">Detecting collisions</h2>
+            <p class="intro-text">You can detect when a single object collides with any member of a group. You can also detect when any member of one group collides with a member of another group.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Collisions between a single object and a group</h3>
+                <p class="intro-text">The spritecollideany() function takes an object and a group, and returns True if the object overlaps with any member of the group.</p>
+                <pre>if pygame.sprite.spritecollideany(ship, aliens):
+    ships_left -= 1</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Collisions between two groups</h3>
+                <p class="intro-text">The sprite.groupcollide() function takes two groups, and two booleans. The function returns a dictionary containing information about the members that have collided. The booleans tell Pygame whether to delete the members of either group that have collided.</p>
+                <pre>collisions = pygame.sprite.groupcollide(
+        bullets, aliens, True, True)
+
+score += len(collisions) * alien_point_value</pre>
+            </div>
+        </section>
+
+        <!-- RENDERING TEXT -->
+        <section id="text">
+            <h2 class="main-topic-header">Rendering text</h2>
+            <p class="intro-text">You can use text for a variety of purposes in a game. For example you can share information with players, and you can display a score.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Displaying a message</h3>
+                <p class="intro-text">The following code defines a message, then a color for the text and the background color for the message. A font is defined using the default system font, with a font size of 48. The font.render() function is used to create an image of the message, and we get the rect object associated with the image. We then center the image on the screen and display it.</p>
+                <pre>msg = "Play again?"
+msg_color = (100, 100, 100)
+bg_color = (230, 230, 230)
+
+f = pygame.font.SysFont(None, 48)
+msg_image = f.render(msg, True, msg_color,
+        bg_color)
+msg_image_rect = msg_image.get_rect()
+msg_image_rect.center = screen_rect.center
+screen.blit(msg_image, msg_image_rect)</pre>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('#nav-list li');
+            const sections = document.querySelectorAll('main section');
+            const showAllBtn = document.getElementById('show-all-btn');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const targetId = item.getAttribute('data-target');
+                    
+                    navItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+
+                    sections.forEach(section => {
+                        if (section.id === targetId) {
+                            section.classList.add('visible');
+                        } else {
+                            section.classList.remove('visible');
+                        }
+                    });
+
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            showAllBtn.addEventListener('click', () => {
+                navItems.forEach(i => i.classList.remove('active'));
+                sections.forEach(section => {
+                    section.classList.add('visible');
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+    <script src="../assets/theme.js"></script>
+</body>
+</html>

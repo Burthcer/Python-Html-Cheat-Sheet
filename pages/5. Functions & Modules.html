@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginner's Python Cheat Sheet - Functions & Modules</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+    <aside>
+        <a href="../index.html" class="back-btn">← Back to Dashboard</a>
+        <h1>Functions & Modules</h1>
+        <button id="show-all-btn">Show All Content</button>
+        <nav>
+            <ul id="nav-list">
+                <li data-target="what-is" class="active">What are functions?</li>
+                <li data-target="defining">Defining a function</li>
+                <li data-target="passing-info">Passing information</li>
+                <li data-target="args">Positional and keyword arguments</li>
+                <li data-target="defaults">Default values</li>
+                <li data-target="returns">Return values</li>
+                <li data-target="viz">Visualizing functions</li>
+                <li data-target="lists">Passing a list to a function</li>
+                <li data-target="arbitrary">Arbitrary number of arguments</li>
+                <li data-target="structure">Structuring functions</li>
+                <li data-target="modules">Modules</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main id="content-area">
+
+        <!-- WHAT ARE FUNCTIONS -->
+        <section id="what-is" class="visible">
+            <h2 class="main-topic-header">What are functions?</h2>
+            <p class="intro-text">Functions are named blocks of code designed to do one specific job. Functions allow you to write code once that can then be run whenever you need to accomplish the same task.
+            Functions can take in the information they need, and return the information they generate. Using functions effectively makes your programs easier to write, read, test, and maintain.</p>
+        </section>
+
+        <!-- DEFINING A FUNCTION -->
+        <section id="defining">
+            <h2 class="main-topic-header">Defining a function</h2>
+            <p class="intro-text">The first line of a function is its definition, marked by the keyword def. The name of the function is followed by a set of parentheses and a colon. A docstring, in triple quotes, describes what the function does. The body of a function is indented one level.
+            To call a function, give the name of the function followed by a set of parentheses.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Making a function</h3>
+                <pre>def greet_user():
+    """Display a simple greeting."""
+    print("Hello!")
+
+greet_user()</pre>
+            </div>
+        </section>
+
+        <!-- PASSING INFORMATION -->
+        <section id="passing-info">
+            <h2 class="main-topic-header">Passing information to a function</h2>
+            <p class="intro-text">Information that's passed to a function is called an argument; information that's received by a function is called a parameter. Arguments are included in parentheses after the function's name, and parameters are listed in parentheses in the function's definition.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Passing a simple argument</h3>
+                <pre>def greet_user(username):
+    """Display a simple greeting."""
+    print(f"Hello, {username}!")
+
+greet_user('jesse')
+greet_user('diana')
+greet_user('brandon')</pre>
+            </div>
+        </section>
+
+        <!-- POSITIONAL AND KEYWORD ARGUMENTS -->
+        <section id="args">
+            <h2 class="main-topic-header">Positional and keyword arguments</h2>
+            <p class="intro-text">The two main kinds of arguments are positional and keyword arguments. When you use positional arguments Python matches the first argument in the function call with the first parameter in the function definition, and so forth.
+            With keyword arguments, you specify which parameter each argument should be assigned to in the function call. When you use keyword arguments, the order of the arguments doesn't matter.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using positional arguments</h3>
+                <pre>def describe_pet(animal, name):
+    """Display information about a pet."""
+    print(f"\nI have a {animal}.")
+    print(f"Its name is {name}.")
+
+describe_pet('hamster', 'harry')
+describe_pet('dog', 'willie')</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using keyword arguments</h3>
+                <pre>def describe_pet(animal, name):
+    """Display information about a pet."""
+    print(f"\nI have a {animal}.")
+    print(f"Its name is {name}.")
+
+describe_pet(animal='hamster', name='harry')
+describe_pet(name='willie', animal='dog')</pre>
+            </div>
+        </section>
+
+        <!-- DEFAULT VALUES -->
+        <section id="defaults">
+            <h2 class="main-topic-header">Default values</h2>
+            <p class="intro-text">You can provide a default value for a parameter. When function calls omit this argument the default value will be used. Parameters with default values must be listed after parameters without default values in the function's definition so positional arguments can still work correctly.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using a default value</h3>
+                <pre>def describe_pet(name, animal='dog'):
+    """Display information about a pet."""
+    print(f"\nI have a {animal}.")
+    print(f"Its name is {name}.")
+
+describe_pet('harry', 'hamster')
+describe_pet('willie')</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using None to make an argument optional</h3>
+                <pre>def describe_pet(animal, name=None):
+    """Display information about a pet."""
+    print(f"\nI have a {animal}.")
+    if name:
+        print(f"Its name is {name}.")
+
+describe_pet('hamster', 'harry')
+describe_pet('snake')</pre>
+            </div>
+        </section>
+
+        <!-- RETURN VALUES -->
+        <section id="returns">
+            <h2 class="main-topic-header">Return values</h2>
+            <p class="intro-text">A function can return a value or a set of values. When a function returns a value, the calling line should provide a variable which the return value can be assigned to. A function stops running when it reaches a return statement.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Returning a single value</h3>
+                <pre>def get_full_name(first, last):
+    """Return a neatly formatted full name."""
+    full_name = f"{first} {last}"
+    return full_name.title()
+
+musician = get_full_name('jimi', 'hendrix')
+print(musician)</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Returning a dictionary</h3>
+                <pre>def build_person(first, last):
+    """Return a dictionary of information about a person.
+    """
+    person = {'first': first, 'last': last}
+    return person
+
+musician = build_person('jimi', 'hendrix')
+print(musician)</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Returning a dictionary with optional values</h3>
+                <pre>def build_person(first, last, age=None):
+    """Return a dictionary of information about a person.
+    """
+    person = {'first': first, 'last': last}
+    if age:
+        person['age'] = age
+    
+    return person
+
+musician = build_person('jimi', 'hendrix', 27)
+print(musician)
+
+musician = build_person('janis', 'joplin')
+print(musician)</pre>
+            </div>
+        </section>
+
+        <!-- VISUALIZING FUNCTIONS -->
+        <section id="viz">
+            <h2 class="main-topic-header">Visualizing functions</h2>
+            <p class="intro-text">Try running some of these examples, and some of your own programs that use functions, on pythontutor.com.</p>
+        </section>
+
+        <!-- PASSING A LIST -->
+        <section id="lists">
+            <h2 class="main-topic-header">Passing a list to a function</h2>
+            <p class="intro-text">You can pass a list as an argument to a function, and the function can work with the values in the list. Any changes the function makes to the list will affect the original list. You can prevent a function from modifying a list by passing a copy of the list as an argument.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Passing a list as an argument</h3>
+                <pre>def greet_users(names):
+    """Print a simple greeting to everyone."""
+    for name in names:
+        msg = f"Hello, {name}!"
+        print(msg)
+
+usernames = ['hannah', 'ty', 'margot']
+greet_users(usernames)</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Allowing a function to modify a list</h3>
+                <p class="description">The following example sends a list of models to a function for printing. The first list is emptied, and the second list is filled.</p>
+                <pre>def print_models(unprinted, printed):
+    """3d print a set of models."""
+    while unprinted:
+        current_model = unprinted.pop()
+        print(f"Printing {current_model}")
+        printed.append(current_model)
+
+# Store some unprinted designs,
+# and print each of them.
+unprinted = ['phone case', 'pendant', 'ring']
+printed = []
+print_models(unprinted, printed)
+
+print(f"\nUnprinted: {unprinted}")
+print(f"Printed: {printed}")</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Preventing a function from modifying a list</h3>
+                <p class="description">The following example is the same as the previous one, except the original list is unchanged after calling print_models().</p>
+                <pre>def print_models(unprinted, printed):
+    """3d print a set of models."""
+    while unprinted:
+        current_model = unprinted.pop()
+        print(f"Printing {current_model}")
+        printed.append(current_model)
+
+# Store some unprinted designs,
+# and print each of them.
+original = ['phone case', 'pendant', 'ring']
+printed = []
+
+print_models(original[:], printed)
+print(f"\nOriginal: {original}")
+print(f"Printed: {printed}")</pre>
+            </div>
+        </section>
+
+        <!-- ARBITRARY NUMBER OF ARGUMENTS -->
+        <section id="arbitrary">
+            <h2 class="main-topic-header">Passing an arbitrary number of arguments</h2>
+            <p class="intro-text">Sometimes you won't know how many arguments a function will need to accept. Python allows you to collect an arbitrary number of arguments into one parameter using the * operator. A parameter that accepts an arbitrary number of arguments must come last in the function definition. This parameter is often named *args.
+            The ** operator allows a parameter to collect an arbitrary number of keyword arguments. These are stored as a dictionary with the parameter names as keys, and the arguments as values. This is often named **kwargs.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Collecting an arbitrary number of arguments</h3>
+                <pre>def make_pizza(size, *toppings):
+    """Make a pizza."""
+    print(f"\nMaking a {size} pizza.")
+    
+    print("Toppings:")
+    for topping in toppings:
+        print(f"- {topping}")
+
+# Make three pizzas with different toppings.
+make_pizza('small', 'pepperoni')
+make_pizza('large', 'bacon bits', 'pineapple')
+make_pizza('medium', 'mushrooms', 'peppers',
+           'onions', 'extra cheese')</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Collecting an arbitrary number of keyword arguments</h3>
+                <pre>def build_profile(first, last, **user_info):
+    """Build a dictionary for a user."""
+    user_info['first'] = first
+    user_info['last'] = last
+    
+    return user_info
+
+# Create two users with different kinds
+# of information.
+user_0 = build_profile('albert', 'einstein',
+                       location='princeton')
+
+user_1 = build_profile('marie', 'curie',
+                       location='paris', field='chemistry')
+
+print(user_0)
+print(user_1)</pre>
+            </div>
+        </section>
+
+        <!-- BEST WAY TO STRUCTURE -->
+        <section id="structure">
+            <h2 class="main-topic-header">What's the best way to structure a function?</h2>
+            <div class="info-box">
+                There are many ways to write and call a function. When you're starting out, aim for something that simply works. As you gain experience you'll develop an understanding of the subtle advantages of different structures such as positional and keyword arguments, and the various approaches to importing functions. For now if your functions do what you need them to, you're doing well.
+            </div>
+        </section>
+
+        <!-- MODULES -->
+        <section id="modules">
+            <h2 class="main-topic-header">Modules</h2>
+            <p class="intro-text">You can store your functions in a separate file called a module, and then import the functions you need into the file containing your main program. This allows for cleaner program files. Make sure your module is stored in the same directory as your main program.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Storing a function in a module</h3>
+                <p class="description">File: pizza.py</p>
+                <pre>def make_pizza(size, *toppings):
+    """Make a pizza."""
+    print(f"\nMaking a {size} pizza.")
+    print("Toppings:")
+    for topping in toppings:
+        print(f"- {topping}")</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Importing an entire module</h3>
+                <p class="description">File: making_pizzas.py Every function in the module is available in the program file.</p>
+                <pre>import pizza
+
+pizza.make_pizza('medium', 'pepperoni')
+pizza.make_pizza('small', 'bacon', 'pineapple')</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Importing a specific function</h3>
+                <p class="description">Only the imported functions are available in the program file.</p>
+                <pre>from pizza import make_pizza
+
+make_pizza('medium', 'pepperoni')
+make_pizza('small', 'bacon', 'pineapple')</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Giving a module an alias</h3>
+                <pre>import pizza as p
+
+p.make_pizza('medium', 'pepperoni')
+p.make_pizza('small', 'bacon', 'pineapple')</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Giving a function an alias</h3>
+                <pre>from pizza import make_pizza as mp
+
+mp('medium', 'pepperoni')
+mp('small', 'bacon', 'pineapple')</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Importing all functions from a module</h3>
+                <p class="description">Don't do this, but recognize it when you see it in others' code. It can result in naming conflicts, which can cause errors.</p>
+                <pre>from pizza import *
+
+make_pizza('medium', 'pepperoni')
+make_pizza('small', 'bacon', 'pineapple')</pre>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('#nav-list li');
+            const sections = document.querySelectorAll('main section');
+            const showAllBtn = document.getElementById('show-all-btn');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const targetId = item.getAttribute('data-target');
+                    
+                    navItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+
+                    sections.forEach(section => {
+                        if (section.id === targetId) {
+                            section.classList.add('visible');
+                        } else {
+                            section.classList.remove('visible');
+                        }
+                    });
+
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            showAllBtn.addEventListener('click', () => {
+                navItems.forEach(i => i.classList.remove('active'));
+                sections.forEach(section => {
+                    section.classList.add('visible');
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+    <script src="../assets/theme.js"></script>
+</body>
+</html>

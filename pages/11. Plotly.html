@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginner's Python Cheat Sheet - Plotly</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+    <aside>
+        <a href="../index.html" class="back-btn">← Back to Dashboard</a>
+        <h1>Plotly Cheat Sheet</h1>
+        <button id="show-all-btn">Show All Content</button>
+        <nav>
+            <ul id="nav-list">
+                <li data-target="what-is" class="active">What is Plotly?</li>
+                <li data-target="installing">Installing Plotly</li>
+                <li data-target="basic-plots">Line, Scatter, & Bar Graphs</li>
+                <li data-target="initial-custom">Initial customizations</li>
+                <li data-target="call-custom">Plotting call customizations</li>
+                <li data-target="further-custom">Further customizations</li>
+                <li data-target="express-docs">Plotly Express documentation</li>
+                <li data-target="themes">Predefined themes</li>
+                <li data-target="traces">Adding traces</li>
+                <li data-target="subplots">Using Subplots</li>
+                <li data-target="further-docs">Further documentation</li>
+                <li data-target="global-data">Plotting global datasets</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main id="content-area">
+
+        <!-- WHAT IS PLOTLY -->
+        <section id="what-is" class="visible">
+            <h2 class="main-topic-header">What is Plotly?</h2>
+            <div class="info-box">
+                Data visualization involves exploring data through visual representations. Plotly helps you make visually appealing representations of the data you’re working with. Plotly is particularly well suited for visualizations that will be presented online, because it supports interactive elements.
+                <br><br>
+                Plotly express lets you see a basic version of your plot with just a few lines of code. Once you know the plot works for your data, you can refine the style of your plot.
+            </div>
+        </section>
+
+        <!-- INSTALLING PLOTLY -->
+        <section id="installing">
+            <h2 class="main-topic-header">Installing Plotly</h2>
+            <p class="intro-text">Plotly Express requires the pandas library.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Installing Plotly with pip</h3>
+                <pre>$ python -m pip install --user plotly
+$ python -m pip install --user pandas</pre>
+            </div>
+        </section>
+
+        <!-- BASIC PLOTS -->
+        <section id="basic-plots">
+            <h2 class="main-topic-header">Line graphs, scatter plots, and bar graphs</h2>
+            <p class="intro-text">To make a plot with Plotly Express, you specify the data and then create a fig object. The call to fig.show() opens the plot in a new browser tab. You have a plot in just two lines of code!</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Making a line graph</h3>
+                <p class="intro-text">Plotly generates JavaScript code to render the plot file. If you're curious to see the code, open your browser's inspector tool when the plot opens.</p>
+                <pre>import plotly.express as px
+
+# Define the data.
+x_values = list(range(11))
+squares = [x**2 for x in x_values]
+
+# Visualize the data.
+fig = px.line(x=x_values, y=squares)
+fig.show()</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Making a scatter plot</h3>
+                <p class="intro-text">To make a scatter plot, change line() to scatter(). This is the point of Plotly Express; you can easily see your data in a variety of ways before committing to a more specific styling options.</p>
+                <pre>fig = px.scatter(x=x_values, y=squares)</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Making a bar graph</h3>
+                <pre>fig = px.bar(x=x_values, y=squares)</pre>
+            </div>
+        </section>
+
+        <!-- INITIAL CUSTOMIZATIONS -->
+        <section id="initial-custom">
+            <h2 class="main-topic-header">Initial customizations</h2>
+            <p class="intro-text">The functions that generate plots also accept parameters that specify titles, labels, and other formatting directives for your visualizations.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Adding a title and axis labels</h3>
+                <p class="intro-text">The title is a string. The labels dictionary lets you specify which aspects of the plot will have custom labels.</p>
+                <pre>import plotly.express as px
+
+# Define the data.
+x_values = list(range(11))
+squares = [x**2 for x in x_values]
+
+# Visualize the data.
+title = "Square Numbers"
+labels = {'x': 'Value', 'y': 'Square of Value'}
+
+fig = px.scatter(x=x_values, y=squares,
+        title=title, labels=labels)
+fig.show()</pre>
+            </div>
+        </section>
+
+        <!-- PLOTTING CALL CUSTOMIZATIONS -->
+        <section id="call-custom">
+            <h2 class="main-topic-header">More customizations in the plotting call</h2>
+            <p class="intro-text">Plotly Express was designed to give you as much control as possible, using as little code as possible. Here's a small example of how much can be customized within a single plotting call.
+            <br>Most of these arguments can be single values, or sequences that match the size of the overall dataset.</p>
+            <pre>import plotly.express as px
+
+x_values = list(range(11))
+squares = [x**2 for x in x_values]
+
+title = "Square Numbers"
+labels = {'x': 'Value', 'y': 'Square of Value'}
+
+fig = px.scatter(
+        x=x_values,
+        y=squares,
+        title=title,
+        labels=labels,
+        size=squares,
+        color=squares,
+        opacity=0.5,
+        width=1200,
+        height=800,
+)
+
+fig.show()</pre>
+        </section>
+
+        <!-- FURTHER CUSTOMIZATIONS -->
+        <section id="further-custom">
+            <h2 class="main-topic-header">Further customizations</h2>
+            <p class="intro-text">You can make a wide variety of further customizations to a plot using the update methods. For example, update_layout() gives you control of many formatting options.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using update_layout()</h3>
+                <p class="intro-text">Here the update_layout() method is used to change the font sizes, and change the tick mark spacing on the x-axis.</p>
+                <pre>import plotly.express as px
+
+x_values = list(range(11))
+squares = [x**2 for x in x_values]
+
+title = "Square Numbers"
+labels = {'x': 'Value', 'y': 'Square of Value'}
+
+fig = px.scatter(
+        x=x_values,
+        y=squares,
+        ...
+)
+
+fig.update_layout(
+        title_font_size=30,
+        xaxis_title_font_size=24,
+        xaxis_dtick=1,
+        xaxis_tickfont_size=16,
+        yaxis_title_font_size=24,
+        yaxis_tickfont_size=16,
+)
+
+fig.show()</pre>
+            </div>
+        </section>
+
+        <!-- EXPRESS DOCS -->
+        <section id="express-docs">
+            <h2 class="main-topic-header">Plotly Express documentation</h2>
+            <div class="info-box">
+                Plotly's documentation is extensive and well-organized. There's a lot of it, though, so it can be hard to know where to begin. Start with an overview of Plotly Express at plotly.com/python/plotly-express. This page itself is helpful; make sure you also click on the documentation for the kinds of plots you use most often. These lead to pages full of discussions and examples.
+                <br><br>
+                Also see the Python API reference for plotly at plotly.com/python-api-reference. This is a reference page showing all the different kinds of plots you can make with Plotly. If you click on any of the links, you can see all the arguments that can be included in plotting calls.
+            </div>
+        </section>
+
+        <!-- PREDEFINED THEMES -->
+        <section id="themes">
+            <h2 class="main-topic-header">Using a predefined theme</h2>
+            <p class="intro-text">A theme is a set of styles applied to a visualization in Plotly. Themes are implemented with templates.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using a theme</h3>
+                <pre>import plotly.express as px
+
+# Define the data.
+x_values = list(range(11))
+squares = [x**2 for x in x_values]
+
+# Visualize the data.
+title = "Square Numbers"
+labels = {'x': 'Value', 'y': 'Square of Value'}
+
+fig = px.scatter(x=x_values, y=squares,
+        title=title, labels=labels,
+        template='plotly_dark')
+fig.show()</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Viewing all available themes</h3>
+                <pre>>>> import plotly.io as pio
+>>> pio.templates
+Templates configuration
+-----------------------
+    Default template: 'plotly'
+    Available templates:
+        ['ggplot2', 'seaborn',...,
+        'ygridoff', 'gridon', 'none']</pre>
+            </div>
+        </section>
+
+        <!-- ADDING TRACES -->
+        <section id="traces">
+            <h2 class="main-topic-header">Adding traces to a Plotly Express plot</h2>
+            <p class="intro-text">In Plotly, a trace is a dataset that can be plotted on a chart. You can add traces to existing Plotly Express plots. Additional plots need to be specified using the graph_objects module.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using fig.add_trace()</h3>
+                <pre>import plotly.express as px
+import plotly.graph_objects as go
+
+days = list(range(1, 10))
+highs = [60, 63, 68, 70, 68, 70, 66, 62, 64]
+lows = [51, 54, 53, 57, 54, 56, 52, 53, 49]
+
+# Start by plotting low temperatures.
+fig = px.line(x=days, y=lows)
+
+# Add a new trace for the high temperatures.
+new_trace = go.Scatter(x=days, y=highs,
+        mode='lines')
+fig.add_trace(new_trace)
+
+fig.show()</pre>
+            </div>
+        </section>
+
+        <!-- USING SUBPLOTS -->
+        <section id="subplots">
+            <h2 class="main-topic-header">Using Subplots</h2>
+            <p class="intro-text">It's often useful to have multiple plots share the same axes. This is done using the subplots module.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Adding subplots to a figure</h3>
+                <p class="intro-text">To use the subplots module, make a figure to hold all the charts that will be made. Then use the add_trace() method to add each data series to the overall figure.
+                <br>All individual plots need to be made using the graph_objects module.</p>
+                <pre>from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+
+x_values = list(range(11))
+squares = [x**2 for x in x_values]
+cubes = [x**3 for x in x_values]
+
+# Make two subplots, sharing a y-axis.
+fig = make_subplots(rows=1, cols=2,
+        shared_yaxes=True)
+
+# Start by plotting the square numbers.
+squares_trace = go.Scatter(x=x_values,
+        y=squares)
+fig.add_trace(squares_trace, row=1, col=1)
+
+# Add a new trace for the cubes.
+cubes_trace = go.Scatter(x=x_values, y=cubes)
+fig.add_trace(cubes_trace, row=1, col=2)
+
+title = "Squares and Cubes"
+fig.update_layout(title_text=title)
+
+fig.show()</pre>
+            </div>
+        </section>
+
+        <!-- FURTHER DOCS -->
+        <section id="further-docs">
+            <h2 class="main-topic-header">Further documentation</h2>
+            <div class="info-box">
+                After exploring the Plotly Express documentation, look at Styling Plotly Express Figures in Python, at plotly.com/python/styling-plotly-express. This explains all the ways you can style and format plots. After that, the Python Figure Reference (plotly.com/python/reference/index) will be much more useful. It shows you all the possible settings you can change, with examples for each.
+                <br><br>
+                Make sure you read about "magic underscores" in Plotly, at plotly.com/python/creating-and-updating-figures. They take a little getting used to, but once you're familiar with the syntax they make it much easier to specify exactly the settings you want to modify.
+                <br><br>
+                If you're using subplots, read Subplots in Python at plotly.com/python/subplots. Also look at Graph Objects in Python at plotly.com/python/graph-objects, which are used to make individual plots in a subplot.
+            </div>
+        </section>
+
+        <!-- GLOBAL DATA -->
+        <section id="global-data">
+            <h2 class="main-topic-header">Plotting global datasets</h2>
+            <p class="intro-text">Plotly has a variety of mapping tools. For example, if you have a set of points represented by latitude and longitude, you can create a scatter plot of those points overlaying a map.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">The scattergeo chart type</h3>
+                <p class="intro-text">Here's a map showing the location of three of the higher peaks in North America. If you hover over each point, you'll see its location and the name of the mountain.</p>
+                <pre>import plotly.express as px
+
+# Points in (lat, lon) format.
+peak_coords = [
+    (63.069, -151.0063),
+    (60.5671, -140.4055),
+    (46.8529, -121.7604),
+]
+
+# Make matching lists of lats, lons,
+# and labels.
+lats = [pc[0] for pc in peak_coords]
+lons = [pc[1] for pc in peak_coords]
+
+peak_names = [
+    "Denali",
+    "Mt Logan",
+    "Mt Rainier"
+]
+elevations = [20_000, 18_000, 14_000]
+
+# Generate initial map.
+title = "Selected High Peaks"
+fig = px.scatter_geo(
+    lat=lats,
+    lon=lons,
+    title=title,
+    projection="natural earth",
+    text=peak_names,
+    size=elevations,
+    scope="north america",
+)
+
+# Customize formatting options.
+fig.update_layout(titlefont_size=24)
+fig.update_traces(
+    textposition="middle right",
+    textfont_size=18,
+)
+
+fig.show()</pre>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('#nav-list li');
+            const sections = document.querySelectorAll('main section');
+            const showAllBtn = document.getElementById('show-all-btn');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const targetId = item.getAttribute('data-target');
+                    
+                    navItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+
+                    sections.forEach(section => {
+                        if (section.id === targetId) {
+                            section.classList.add('visible');
+                        } else {
+                            section.classList.remove('visible');
+                        }
+                    });
+
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            showAllBtn.addEventListener('click', () => {
+                navItems.forEach(i => i.classList.remove('active'));
+                sections.forEach(section => {
+                    section.classList.add('visible');
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+    <script src="../assets/theme.js"></script>
+</body>
+</html>

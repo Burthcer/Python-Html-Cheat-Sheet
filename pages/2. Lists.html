@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginner's Python Cheat Sheet - Lists & Tuples</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+    <aside>
+        <a href="../index.html" class="back-btn">← Back to Dashboard</a>
+        <h1>Beginner's Python Cheat Sheet - Lists</h1>
+        <button id="show-all-btn">Show All Content</button>
+        <nav>
+            <ul id="nav-list">
+                <li data-target="what-are-lists">What are lists?</li>
+                <li data-target="defining">Defining a list</li>
+                <li data-target="accessing">Accessing elements</li>
+                <li data-target="modifying">Modifying individual items</li>
+                <li data-target="adding">Adding elements</li>
+                <li data-target="removing">Removing elements</li>
+                <li data-target="popping">Popping elements</li>
+                <li data-target="length">List length</li>
+                <li data-target="sorting">Sorting a list</li>
+                <li data-target="looping">Looping through a list</li>
+                <li data-target="range">The range() function</li>
+                <li data-target="stats">Simple statistics</li>
+                <li data-target="slicing">Slicing a list</li>
+                <li data-target="copying">Copying a list</li>
+                <li data-target="comprehensions">List comprehensions</li>
+                <li data-target="styling">Styling your code</li>
+                <li data-target="tuples">Tuples</li>
+                <li data-target="visualizing">Visualizing your code</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main id="content-area">
+
+        <!-- WHAT ARE LISTS -->
+        <section id="what-are-lists" class="visible">
+            <h2 class="main-topic-header">What are lists?</h2>
+            <p class="intro-text">A list stores a series of items in a particular order. Lists allow you to store sets of information in one place, whether you have just a few items or millions of items. Lists are one of Python's most powerful features readily accessible to new programmers, and they tie together many important concepts in programming.</p>
+        </section>
+
+        <!-- DEFINING A LIST -->
+        <section id="defining">
+            <h2 class="main-topic-header">Defining a list</h2>
+            <p class="intro-text">Use square brackets to define a list, and use commas to separate individual items in the list. Use plural names for lists, to make it clear that the variable represents more than one item.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Making a list</h3>
+                <pre>users = ['val', 'bob', 'mia', 'ron', 'ned']</pre>
+            </div>
+        </section>
+
+        <!-- ACCESSING ELEMENTS -->
+        <section id="accessing">
+            <h2 class="main-topic-header">Accessing elements</h2>
+            <p class="intro-text">Individual elements in a list are accessed according to their position, called the index. The index of the first element is 0, the index of the second element is 1, and so forth. Negative indices refer to items at the end of the list. To get a particular element, write the name of the list and then the index of the element in square brackets.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Getting the first element</h3>
+                <pre>first_user = users[0]</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Getting the second element</h3>
+                <pre>second_user = users[1]</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Getting the last element</h3>
+                <pre>newest_user = users[-1]</pre>
+            </div>
+        </section>
+
+        <!-- MODIFYING INDIVIDUAL ITEMS -->
+        <section id="modifying">
+            <h2 class="main-topic-header">Modifying individual items</h2>
+            <p class="intro-text">Once you've defined a list, you can change the value of individual elements in the list. You do this by referring to the index of the item you want to modify.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Changing an element</h3>
+                <pre>users[0] = 'valerie'
+users[1] = 'robert'
+users[-2] = 'ronald'</pre>
+            </div>
+        </section>
+
+        <!-- ADDING ELEMENTS -->
+        <section id="adding">
+            <h2 class="main-topic-header">Adding elements</h2>
+            <p class="intro-text">You can add elements to the end of a list, or you can insert them wherever you like in a list. This allows you to modify existing lists, or start with an empty list and then add items to it as the program develops.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Adding an element to the end of the list</h3>
+                <pre>users.append('amy')</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Starting with an empty list</h3>
+                <pre>users = []
+users.append('amy')
+users.append('val')
+users.append('bob')
+users.append('mia')</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Inserting elements at a particular position</h3>
+                <pre>users.insert(0, 'joe')
+users.insert(3, 'bea')</pre>
+            </div>
+        </section>
+
+        <!-- REMOVING ELEMENTS -->
+        <section id="removing">
+            <h2 class="main-topic-header">Removing elements</h2>
+            <p class="intro-text">You can remove elements by their position in a list, or by the value of the item. If you remove an item by its value, Python removes only the first item that has that value.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Deleting an element by its position</h3>
+                <pre>del users[-1]</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Removing an item by its value</h3>
+                <pre>users.remove('mia')</pre>
+            </div>
+        </section>
+
+        <!-- POPPING ELEMENTS -->
+        <section id="popping">
+            <h2 class="main-topic-header">Popping elements</h2>
+            <p class="intro-text">If you want to work with an element that you're removing from the list, you can "pop" the item. If you think of the list as a stack of items, pop() takes an item off the top of the stack. By default pop() returns the last element in the list, but you can also pop elements from any position in the list.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Pop the last item from a list</h3>
+                <pre>most_recent_user = users.pop()
+print(most_recent_user)</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Pop the first item in a list</h3>
+                <pre>first_user = users.pop(0)
+print(first_user)</pre>
+            </div>
+        </section>
+
+        <!-- LIST LENGTH -->
+        <section id="length">
+            <h2 class="main-topic-header">List length</h2>
+            <p class="intro-text">The len() function returns the number of items in a list.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Find the length of a list</h3>
+                <pre>num_users = len(users)
+print(f"We have {num_users} users.")</pre>
+            </div>
+        </section>
+
+        <!-- SORTING A LIST -->
+        <section id="sorting">
+            <h2 class="main-topic-header">Sorting a list</h2>
+            <p class="intro-text">The sort() method changes the order of a list permanently. The sorted() function returns a copy of the list, leaving the original list unchanged. You can sort the items in a list in alphabetical order, or reverse alphabetical order. You can also reverse the original order of the list. Keep in mind that lowercase and uppercase letters may affect the sort order.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Sorting a list permanently</h3>
+                <pre>users.sort()</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Sorting a list permanently in reverse alphabetical order</h3>
+                <pre>users.sort(reverse=True)</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Sorting a list temporarily</h3>
+                <pre>print(sorted(users))
+print(sorted(users, reverse=True))</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Reversing the order of a list</h3>
+                <pre>users.reverse()</pre>
+            </div>
+        </section>
+
+        <!-- LOOPING THROUGH A LIST -->
+        <section id="looping">
+            <h2 class="main-topic-header">Looping through a list</h2>
+            <p class="intro-text">Lists can contain millions of items, so Python provides an efficient way to loop through all the items in a list. When you set up a loop, Python pulls each item from the list one at a time and assigns it to a temporary variable, which you provide a name for. This name should be the singular version of the list name. The indented block of code makes up the body of the loop, where you can work with each individual item. Any lines that are not indented run after the loop is completed.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Printing all items in a list</h3>
+                <pre>for user in users:
+    print(user)</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Printing a message for each item, and a separate message afterwards</h3>
+                <pre>for user in users:
+    print(f"\nWelcome, {user}!")
+    print("We're so glad you joined!")
+
+print("\nWelcome, we're glad to see you all!")</pre>
+            </div>
+        </section>
+
+        <!-- THE RANGE() FUNCTION -->
+        <section id="range">
+            <h2 class="main-topic-header">The range() function</h2>
+            <p class="intro-text">You can use the range() function to work with a set of numbers efficiently. The range() function starts at 0 by default, and stops one number below the number passed to it. You can use the list() function to efficiently generate a large list of numbers.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Printing the numbers 0 to 1000</h3>
+                <pre>for number in range(1001):
+    print(number)</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Printing the numbers 1 to 1000</h3>
+                <pre>for number in range(1, 1001):
+    print(number)</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Making a list of numbers from 1 to a million</h3>
+                <pre>numbers = list(range(1, 1_000_001))</pre>
+            </div>
+        </section>
+
+        <!-- SIMPLE STATISTICS -->
+        <section id="stats">
+            <h2 class="main-topic-header">Simple statistics</h2>
+            <p class="intro-text">There are a number of simple statistical operations you can run on a list containing numerical data.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Finding the minimum value in a list</h3>
+                <pre>ages = [93, 99, 66, 17, 85, 1, 35, 82, 2, 77]
+youngest = min(ages)</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Finding the maximum value</h3>
+                <pre>ages = [93, 99, 66, 17, 85, 1, 35, 82, 2, 77]
+oldest = max(ages)</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Finding the sum of all values</h3>
+                <pre>ages = [93, 99, 66, 17, 85, 1, 35, 82, 2, 77]
+total_years = sum(ages)</pre>
+            </div>
+        </section>
+
+        <!-- SLICING A LIST -->
+        <section id="slicing">
+            <h2 class="main-topic-header">Slicing a list</h2>
+            <p class="intro-text">You can work with any subset of elements from a list. A portion of a list is called a slice. To slice a list start with the index of the first item you want, then add a colon and the index after the last item you want. Leave off the first index to start at the beginning of the list, and leave off the second index to slice through the end of the list.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Getting the first three items</h3>
+                <pre>finishers = ['kai', 'abe', 'ada', 'gus', 'zoe']
+first_three = finishers[:3]</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Getting the middle three items</h3>
+                <pre>middle_three = finishers[1:4]</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Getting the last three items</h3>
+                <pre>last_three = finishers[-3:]</pre>
+            </div>
+        </section>
+
+        <!-- COPYING A LIST -->
+        <section id="copying">
+            <h2 class="main-topic-header">Copying a list</h2>
+            <p class="intro-text">To copy a list make a slice that starts at the first item and ends at the last item. If you try to copy a list without using this approach, whatever you do to the copied list will affect the original list as well.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Making a copy of a list</h3>
+                <pre>finishers = ['kai', 'abe', 'ada', 'gus', 'zoe']
+copy_of_finishers = finishers[:]</pre>
+            </div>
+        </section>
+
+        <!-- LIST COMPREHENSIONS -->
+        <section id="comprehensions">
+            <h2 class="main-topic-header">List comprehensions</h2>
+            <p class="intro-text">You can use a loop to generate a list based on a range of numbers or on another list. This is a common operation, so Python offers a more efficient way to do it. List comprehensions may look complicated at first; if so, use the for loop approach until you're ready to start using comprehensions. To write a comprehension, define an expression for the values you want to store in the list. Then write a for loop to generate input values needed to make the list.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using a loop to generate a list of square numbers</h3>
+                <pre>squares = []
+for x in range(1, 11):
+    square = x**2
+    squares.append(square)</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using a comprehension to generate a list of square numbers</h3>
+                <pre>squares = [x**2 for x in range(1, 11)]</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using a loop to convert a list of names to upper case</h3>
+                <pre>names = ['kai', 'abe', 'ada', 'gus', 'zoe']
+upper_names = []
+for name in names:
+    upper_names.append(name.upper())</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using a comprehension to convert a list of names to upper case</h3>
+                <pre>names = ['kai', 'abe', 'ada', 'gus', 'zoe']
+upper_names = [name.upper() for name in names]</pre>
+            </div>
+        </section>
+
+        <!-- STYLING YOUR CODE -->
+        <section id="styling">
+            <h2 class="main-topic-header">Styling your code</h2>
+            <p class="intro-text">Readability counts</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Follow common Python formatting conventions:</h3>
+                <ul class="bullets">
+                    <li>Use four spaces per indentation level.</li>
+                    <li>Keep your lines to 79 characters or fewer.</li>
+                    <li>Use single blank lines to group parts of your program visually.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- TUPLES -->
+        <section id="tuples">
+            <h2 class="main-topic-header">Tuples</h2>
+            <p class="intro-text">A tuple is like a list, except you can't change the values in a tuple once it's defined. Tuples are good for storing information that shouldn't be changed throughout the life of a program. Tuples are usually designated by parentheses. You can overwrite an entire tuple, but you can't change the values of individual elements.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Defining a tuple</h3>
+                <pre>dimensions = (800, 600)</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Looping through a tuple</h3>
+                <pre>for dimension in dimensions:
+    print(dimension)</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Overwriting a tuple</h3>
+                <pre>dimensions = (800, 600)
+print(dimensions)
+
+dimensions = (1200, 900)
+print(dimensions)</pre>
+            </div>
+        </section>
+
+        <!-- VISUALIZING YOUR CODE -->
+        <section id="visualizing">
+            <h2 class="main-topic-header">Visualizing your code</h2>
+            <p class="intro-text">When you're first learning about data structures such as lists, it helps to visualize how Python is working with the information in your program. Python Tutor is a great tool for seeing how Python keeps track of the information in a list. Try running the following code on pythontutor.com, and then run your own code.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Build a list and print the items in the list</h3>
+                <pre>dogs = []
+dogs.append('willie')
+dogs.append('hootz')
+dogs.append('peso')
+dogs.append('goblin')
+
+for dog in dogs:
+    print(f"Hello {dog}!")
+print("I love these dogs!")
+
+print("\nThese were my first two dogs:")
+old_dogs = dogs[:2]
+for old_dog in old_dogs:
+    print(old_dog)
+
+del dogs[0]
+dogs.remove('peso')
+print(dogs)</pre>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('#nav-list li');
+            const sections = document.querySelectorAll('main section');
+            const showAllBtn = document.getElementById('show-all-btn');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const targetId = item.getAttribute('data-target');
+                    
+                    navItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+
+                    sections.forEach(section => {
+                        if (section.id === targetId) {
+                            section.classList.add('visible');
+                        } else {
+                            section.classList.remove('visible');
+                        }
+                    });
+
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            showAllBtn.addEventListener('click', () => {
+                navItems.forEach(i => i.classList.remove('active'));
+                sections.forEach(section => {
+                    section.classList.add('visible');
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+    <script src="../assets/theme.js"></script>
+</body>
+</html>

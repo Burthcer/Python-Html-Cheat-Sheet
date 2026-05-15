@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginner's Python Cheat Sheet - Git</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+    <aside>
+        <a href="../index.html" class="back-btn">← Back to Dashboard</a>
+        <h1>Git & GitHub</h1>
+        <button id="show-all-btn">Show All Content</button>
+        <nav>
+            <ul id="nav-list">
+                <li data-target="version-control" class="active">Version Control</li>
+                <li data-target="installing">Installing Git</li>
+                <li data-target="configuring">Configuring Git</li>
+                <li data-target="ignoring">Ignoring files</li>
+                <li data-target="initializing">Initializing a repository</li>
+                <li data-target="status">Checking the status</li>
+                <li data-target="adding">Adding files</li>
+                <li data-target="making-commit">Making a commit</li>
+                <li data-target="log">Checking the log</li>
+                <li data-target="history">Exploring history</li>
+                <li data-target="branching">Branching</li>
+                <li data-target="undoing">Undoing recent changes</li>
+                <li data-target="stashing">Stashing changes</li>
+                <li data-target="comparing">Comparing commits</li>
+                <li data-target="habits">Good commit habits</li>
+                <li data-target="github">Git & GitHub</li>
+                <li data-target="pull-requests">Using pull requests</li>
+                <li data-target="practicing">Practicing with Git</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main id="content-area">
+
+        <!-- VERSION CONTROL -->
+        <section id="version-control" class="visible">
+            <h2 class="main-topic-header">Version Control</h2>
+            <div class="info-box">
+                Version control software allows you to take snapshots of a project whenever it's in a working state. If your project stops working, you can roll back to the most recent working version of the project.
+                <br><br>
+                Version control is important because it frees you to try new ideas with your code, without worrying that you'll break your overall project. A distributed version control system like Git is also really useful in working collaboratively with other developers.
+            </div>
+        </section>
+
+        <!-- INSTALLING GIT -->
+        <section id="installing">
+            <h2 class="main-topic-header">Installing Git</h2>
+            <p class="intro-text">You can find an installer for your system at git-scm.com/. Before doing that, check if Git is already on your system:</p>
+            <pre>$ git --version
+git version 2.30.1 (Apple Git-130)</pre>
+        </section>
+
+        <!-- CONFIGURING GIT -->
+        <section id="configuring">
+            <h2 class="main-topic-header">Configuring Git</h2>
+            <p class="intro-text">You can configure Git so some of its features are easier to use. The editor setting controls which editor Git will open when it needs you to enter text.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">See all global settings</h3>
+                <pre>$ git config --list</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Set username</h3>
+                <pre>$ git config --global user.name "eric"</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Set email</h3>
+                <pre>$ git config --global user.email "eric@example.com"</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Set editor</h3>
+                <pre>$ git config --global core.editor "nano"</pre>
+            </div>
+        </section>
+
+        <!-- IGNORING FILES -->
+        <section id="ignoring">
+            <h2 class="main-topic-header">Ignoring files</h2>
+            <p class="intro-text">To ignore files make a file called ".gitignore", with a leading dot and no extension. Then list the directories and files you want to ignore.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Ignore directories</h3>
+                <pre>__pycache__/
+my_venv/</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Ignore specific files</h3>
+                <pre>.DS_Store
+secret_key.txt</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Ignore files with specific extensions</h3>
+                <pre>*.pyc</pre>
+            </div>
+        </section>
+
+        <!-- INITIALIZING -->
+        <section id="initializing">
+            <h2 class="main-topic-header">Initializing a repository</h2>
+            <p class="intro-text">All the files Git uses to manage the repository are located in the hidden directory .git. Don't delete that directory, or you'll lose your project's history.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Initialize a repository</h3>
+                <pre>$ git init
+Initialized empty Git repository in
+    my_project/.git/</pre>
+            </div>
+        </section>
+
+        <!-- STATUS -->
+        <section id="status">
+            <h2 class="main-topic-header">Checking the status</h2>
+            <p class="intro-text">It's important to check the status of your project often, even before the first commit. This will tell you which files Git is planning to track.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Check status</h3>
+                <pre>$ git status
+On branch main
+No commits yet
+Untracked files:
+    .gitignore
+    hello.py
+    ...</pre>
+            </div>
+        </section>
+
+        <!-- ADDING FILES -->
+        <section id="adding">
+            <h2 class="main-topic-header">Adding files</h2>
+            <p class="intro-text">You'll need to add the files you want Git to keep track of.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Add all files not in .gitignore</h3>
+                <pre>$ git add .</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Add a single file</h3>
+                <pre>$ git add hello.py</pre>
+            </div>
+        </section>
+
+        <!-- MAKING A COMMIT -->
+        <section id="making-commit">
+            <h2 class="main-topic-header">Making a commit</h2>
+            <p class="intro-text">When making a commit, the -am flag commits all files that have been added, and records a commit message. (It's a good idea to check the status before making each commit.)</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Make a commit with a message</h3>
+                <pre>$ git commit -am "Started project, everything works."
+ 2 files changed, 7 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 hello.py</pre>
+            </div>
+        </section>
+
+        <!-- LOG -->
+        <section id="log">
+            <h2 class="main-topic-header">Checking the log</h2>
+            <p class="intro-text">Git logs all the commits you've made. Checking the log is helpful for understanding the history of your project.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Check log in default format</h3>
+                <pre>$ git log
+commit dc2ebd6... (HEAD -> main)
+Author: Eric Matthes &lt;eric@example.com&gt;
+Date:   Feb 27 11:27:07 2023 -0900
+    Greets user.
+commit bf55851...
+...</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Check log in simpler format</h3>
+                <pre>$ git log --oneline
+dc2ebd6 (HEAD -> main) Greets uer.
+bf55851 Started project, everything works.</pre>
+            </div>
+        </section>
+
+        <!-- HISTORY -->
+        <section id="history">
+            <h2 class="main-topic-header">Exploring history</h2>
+            <p class="intro-text">You can explore a project's history by visiting specific commit hashes, or by referencing the project's HEAD. HEAD refers to the most recent commit of the current branch.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Visit a specific commit</h3>
+                <pre>$ git checkout b9aedbb</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Return to most recent commit of main branch</h3>
+                <pre>$ git checkout main</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Visit the previous commit</h3>
+                <pre>$ git checkout HEAD^</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Visit an earlier commit</h3>
+                <pre>$ git checkout HEAD^^^</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Visit the previous commit (alternate syntax)</h3>
+                <pre>$ git checkout HEAD~1</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Visit an earlier commit (alternate syntax)</h3>
+                <pre>$ git checkout HEAD~3</pre>
+            </div>
+        </section>
+
+        <!-- BRANCHING -->
+        <section id="branching">
+            <h2 class="main-topic-header">Branching</h2>
+            <p class="intro-text">When the work you're about to do will involve multiple commits, you can create a branch where you'll do this work. The changes you make will be kept away from the main branch until you choose to merge them. It's common to delete a branch after merging back to the main branch.
+            <br>Branches can also be used to maintain independent releases of a project.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Make a new branch and switch to it</h3>
+                <pre>$ git checkout -b new_branch_name
+Switched to a new branch 'new_branch_name'</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">See all branches</h3>
+                <pre>$ git branch
+  main
+* new_branch_name</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Switch to a different branch</h3>
+                <pre>$ git checkout main
+Switched to branch 'main'</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Merge branches</h3>
+                <pre>$ git merge new_branch_name
+Updating b9aedbb..5e5130a
+Fast-forward
+ hello.py | 5 +++++
+ 1 file changed, 5 insertions(+)</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Delete a branch</h3>
+                <pre>$ git branch -D new_branch_name
+Deleted branch new_branch_name
+    (was 5e5130a).</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Move last commit to new branch</h3>
+                <pre>$ git branch new_branch_name
+$ git reset --hard HEAD~1
+$ git checkout new_branch_name</pre>
+            </div>
+        </section>
+
+        <!-- UNDOING -->
+        <section id="undoing">
+            <h2 class="main-topic-header">Undoing recent changes</h2>
+            <p class="intro-text">One of the main points of version control is to allow you to go back to any working state of your project and start over from there.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Get rid of all uncommitted changes</h3>
+                <pre>$ git checkout .</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Get rid of all changes since a specific commit</h3>
+                <pre>$ git reset --hard b9aedbb</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Create new branch starting at a previous commit</h3>
+                <pre>$ git checkout -b branch_name b9aedbb</pre>
+            </div>
+        </section>
+
+        <!-- STASHING -->
+        <section id="stashing">
+            <h2 class="main-topic-header">Stashing changes</h2>
+            <p class="intro-text">If you want to save some changes without making a commit, you can stash your changes. This is useful when you want to revisit the most recent commit without making a new commit. You can stash as many sets of changes as you need.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Stash changes since last commit</h3>
+                <pre>$ git stash
+Saved working directory and index state
+  WIP on main: f6f39a6...</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">See stashed changes</h3>
+                <pre>$ git stash list
+stash@{0}: WIP on main: f6f39a6...
+stash@{1}: WIP on main: f6f39a6...
+...</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Reapply changes from most recent stash</h3>
+                <pre>$ git stash pop</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Reapply changes from a specific stash</h3>
+                <pre>$ git stash pop --index 1</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Clear all stashed changes</h3>
+                <pre>$ git stash clear</pre>
+            </div>
+        </section>
+
+        <!-- COMPARING -->
+        <section id="comparing">
+            <h2 class="main-topic-header">Comparing commits</h2>
+            <p class="intro-text">It's often helpful to compare changes across different states of a project.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">See all changes since last commit</h3>
+                <pre>$ git diff</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">See changes in one file since last commit</h3>
+                <pre>$ git diff hello.py</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">See changes since a specific commit</h3>
+                <pre>$ git diff HEAD~2
+$ git diff HEAD^^
+$ git diff fab2cdd</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">See changes between two commits</h3>
+                <pre>$ git diff fab2cdd 7c0a5d8</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">See changes in one file between two commits</h3>
+                <pre>$ git diff fab2cdd 7c0a5d8 hello.py</pre>
+            </div>
+        </section>
+
+        <!-- HABITS -->
+        <section id="habits">
+            <h2 class="main-topic-header">Good commit habits</h2>
+            <div class="info-box">
+                Try to make a commit whenever your project is in a new working state. Make sure you're writing concise commit messages that focus on what changes have been implemented. If you're starting work on a new feature or bugfix, consider making a new branch.
+            </div>
+        </section>
+
+        <!-- GITHUB -->
+        <section id="github">
+            <h2 class="main-topic-header">Git & GitHub</h2>
+            <p class="intro-text">GitHub is a platform for sharing code, and working collaboratively on code. You can clone any public project on GitHub. When you have an account, you can upload your own projects, and make them public or private.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Clone an existing repository to your local system</h3>
+                <pre>$ git clone
+    https://github.com/ehmatthes/pcc_3e.git/
+Cloning into 'pcc_3e'...
+...
+Resolving deltas: 100% (1503/1503), done.</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Push a local project to a GitHub repository</h3>
+                <p class="intro-text">You'll need to make an empty repository on GitHub first.</p>
+                <pre>$ git remote add origin
+    https://github.com/username/hello_repo.git
+$ git push -u origin main
+Enumerating objects: 10, done.
+...
+To https://github.com/username/hello_repo.git
+ * [new branch]      main -> main
+Branch 'main' set up to track remote branch
+    'main' from 'origin'.</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Push recent changes to your GitHub repository</h3>
+                <pre>$ git push origin branch_name</pre>
+            </div>
+        </section>
+
+        <!-- PULL REQUESTS -->
+        <section id="pull-requests">
+            <h2 class="main-topic-header">Using pull requests</h2>
+            <div class="info-box">
+                When you want to pull a set of changes from one branch into the main branch of a project on GitHub, you can make a pull request. To practice making pull requests on your own repositories, make a new branch for your work. When you're finished the work, push the branch to your repository. Then go to the "Pull requests" tab on GitHub, and click "Compare & pull request" on the branch you wish to merge. When you're ready, click "Merge pull request".
+                <br><br>
+                You can then pull these changes back into your local main branch with git pull origin main. This is an alternative to merging changes to your main branch locally, and then pushing the main branch to GitHub.
+            </div>
+        </section>
+
+        <!-- PRACTICING -->
+        <section id="practicing">
+            <h2 class="main-topic-header">Practicing with Git</h2>
+            <div class="info-box">
+                Git can be used in simple ways as a solo developer, and complex ways as part of a large collaborative team. You can gain valuable experience by making a simple throwaway project and trying all of these steps with that project. Make sure your project has multiple files and nested folders to get a clear sense of how Git works.
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('#nav-list li');
+            const sections = document.querySelectorAll('main section');
+            const showAllBtn = document.getElementById('show-all-btn');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const targetId = item.getAttribute('data-target');
+                    
+                    navItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+
+                    sections.forEach(section => {
+                        if (section.id === targetId) {
+                            section.classList.add('visible');
+                        } else {
+                            section.classList.remove('visible');
+                        }
+                    });
+
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            showAllBtn.addEventListener('click', () => {
+                navItems.forEach(i => i.classList.remove('active'));
+                sections.forEach(section => {
+                    section.classList.add('visible');
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+    <script src="../assets/theme.js"></script>
+</body>
+</html>

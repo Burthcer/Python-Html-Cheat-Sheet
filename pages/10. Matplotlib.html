@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginner's Python Cheat Sheet - Matplotlib</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+    <aside>
+        <a href="../index.html" class="back-btn">← Back to Dashboard</a>
+        <h1>Matplotlib Cheat Sheet</h1>
+        <button id="show-all-btn">Show All Content</button>
+        <nav>
+            <ul id="nav-list">
+                <li data-target="what-is" class="active">What is Matplotlib?</li>
+                <li data-target="installing">Installing Matplotlib</li>
+                <li data-target="line-scatter">Line graphs and scatter plots</li>
+                <li data-target="customizing">Customizing plots</li>
+                <li data-target="customizing-cont">Customizing plots (cont.)</li>
+                <li data-target="online-resources">Online resources</li>
+                <li data-target="multiple-plots">Multiple plots</li>
+                <li data-target="dates-times">Working with dates and times</li>
+                <li data-target="dates-times-cont">Working with dates (cont.)</li>
+                <li data-target="multiple-in-one">Multiple plots in one figure</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main id="content-area">
+
+        <!-- WHAT IS MATPLOTLIB -->
+        <section id="what-is" class="visible">
+            <h2 class="main-topic-header">What is Matplotlib?</h2>
+            <p>Data visualization involves exploring data through visual representations. The Matplotlib library helps you make visually appealing representations of the data you’re working with. Matplotlib is extremely flexible; these examples will help you get started with a few simple visualizations.</p>
+            <p style="margin-top:15px;">Many newer plotting libraries are wrappers around Matplotlib, and understanding Matplotlib will help you use those libraries more effectively as well.</p>
+        </section>
+
+        <!-- INSTALLING MATPLOTLIB -->
+        <section id="installing">
+            <h2 class="main-topic-header">Installing Matplotlib</h2>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Installing Matplotlib with pip</h3>
+                <pre>$ python -m pip install --user matplotlib</pre>
+            </div>
+        </section>
+
+        <!-- LINE GRAPHS AND SCATTER PLOTS -->
+        <section id="line-scatter">
+            <h2 class="main-topic-header">Line graphs and scatter plots</h2>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Making a line graph</h3>
+                <p class="intro-text">The fig object represents the entire figure, or collection of plots; ax represents a single plot in the figure. This convention is used even when there's only one plot in the figure.</p>
+                <pre>import matplotlib.pyplot as plt
+
+x_values = [0, 1, 2, 3, 4, 5]
+squares = [0, 1, 4, 9, 16, 25]
+
+fig, ax = plt.subplots()
+ax.plot(x_values, squares)
+
+plt.show()</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Making a scatter plot</h3>
+                <p class="intro-text">scatter() takes a list of x and y values; the s=10 argument controls the size of each point.</p>
+                <pre>import matplotlib.pyplot as plt
+
+x_values = list(range(1000))
+squares = [x**2 for x in x_values]
+
+fig, ax = plt.subplots()
+ax.scatter(x_values, squares, s=10)
+plt.show()</pre>
+            </div>
+        </section>
+
+        <!-- CUSTOMIZING PLOTS -->
+        <section id="customizing">
+            <h2 class="main-topic-header">Customizing plots</h2>
+            <p class="intro-text">Plots can be customized in a wide variety of ways. Just about any element of a plot can be modified.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using built-in styles</h3>
+                <p class="intro-text">Matplotlib comes with a number of built-in styles, which you can use with one additional line of code. The style must be specified before you create the figure.</p>
+                <pre>import matplotlib.pyplot as plt
+
+x_values = list(range(1000))
+squares = [x**2 for x in x_values]
+
+plt.style.use('seaborn-v0_8')
+fig, ax = plt.subplots()
+ax.scatter(x_values, squares, s=10)
+
+plt.show()</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Seeing available styles</h3>
+                <p class="intro-text">You can see all available styles on your system. This can be done in a terminal session.</p>
+                <pre>>>> import matplotlib.pyplot as plt
+>>> plt.style.available
+['Solarize_Light2', '_classic_test_patch', ...</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Adding titles and labels, and scaling axes</h3>
+                <pre>import matplotlib.pyplot as plt
+
+x_values = list(range(1000))
+squares = [x**2 for x in x_values]
+
+# Set overall style to use, and plot data.
+plt.style.use('seaborn-v0_8')
+fig, ax = plt.subplots()
+ax.scatter(x_values, squares, s=10)
+
+# Set chart title and label axes.
+ax.set_title('Square Numbers', fontsize=24)
+ax.set_xlabel('Value', fontsize=14)
+ax.set_ylabel('Square of Value', fontsize=14)
+
+# Set scale of axes, and size of tick labels.
+ax.axis([0, 1100, 0, 1_100_000])
+ax.tick_params(axis='both', labelsize=14)
+
+plt.show()</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using a colormap</h3>
+                <p class="intro-text">A colormap varies the point colors from one shade to another, based on a certain value for each point. The value used to determine the color of each point is passed to the c argument, and the cmap argument specifies which colormap to use.</p>
+                <pre>ax.scatter(x_values, squares, c=squares,
+        cmap=plt.cm.Blues, s=10)</pre>
+            </div>
+        </section>
+
+        <!-- CUSTOMIZING PLOTS (CONT.) -->
+        <section id="customizing-cont">
+            <h2 class="main-topic-header">Customizing plots (cont.)</h2>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Emphasizing points</h3>
+                <p class="intro-text">You can plot as much data as you want on one plot. Here we replot the first and last points larger to emphasize them.</p>
+                <pre>import matplotlib.pyplot as plt
+
+x_values = list(range(1000))
+squares = [x**2 for x in x_values]
+
+fig, ax = plt.subplots()
+ax.scatter(x_values, squares, c=squares,
+        cmap=plt.cm.Blues, s=10)
+
+ax.scatter(x_values[0], squares[0], c='green',
+        s=100)
+ax.scatter(x_values[-1], squares[-1], c='red',
+        s=100)
+
+ax.set_title('Square Numbers', fontsize=24)
+--snip--</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Removing axes</h3>
+                <p class="intro-text">You can customize or remove axes entirely. Here’s how to access each axis, and hide it.</p>
+                <pre>ax.get_xaxis().set_visible(False)
+ax.get_yaxis().set_visible(False)</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Setting a custom figure size</h3>
+                <p class="intro-text">You can make your plot as big or small as you want by using the figsize argument. The dpi argument is optional; if you don’t know your system’s resolution you can omit the argument and adjust the figsize argument accordingly.</p>
+                <pre>fig, ax = plt.subplots(figsize=(10, 6),
+        dpi=128)</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Saving a plot</h3>
+                <p class="intro-text">The Matplotlib viewer has a save button, but you can also save your visualizations programmatically by replacing plt.show() with plt.savefig(). The bbox_inches argument reduces the amount of whitespace around the figure.</p>
+                <pre>plt.savefig('squares.png', bbox_inches='tight')</pre>
+            </div>
+        </section>
+
+        <!-- ONLINE RESOURCES -->
+        <section id="online-resources">
+            <h2 class="main-topic-header">Online resources</h2>
+            <div class="note-box">
+                <p>The matplotlib gallery and documentation are at <a href="https://matplotlib.org/">matplotlib.org/</a>. Be sure to visit the Examples, Tutorials, and User guide sections.</p>
+            </div>
+        </section>
+
+        <!-- MULTIPLE PLOTS -->
+        <section id="multiple-plots">
+            <h2 class="main-topic-header">Multiple plots</h2>
+            <p class="intro-text">You can make as many plots as you want on one figure. When you make multiple plots, you can emphasize relationships in the data. For example you can fill the space between two sets of data.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Plotting two sets of data</h3>
+                <p class="intro-text">Here we use ax.scatter() twice to plot square numbers and cubes on the same figure.</p>
+                <pre>import matplotlib.pyplot as plt
+
+x_values = list(range(11))
+squares = [x**2 for x in x_values]
+cubes = [x**3 for x in x_values]
+
+plt.style.use('seaborn-v0_8')
+fig, ax = plt.subplots()
+
+ax.scatter(x_values, squares, c='blue', s=10)
+ax.scatter(x_values, cubes, c='red', s=10)
+
+plt.show()</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Filling the space between data sets</h3>
+                <p class="intro-text">The fill_between() method fills the space between two data sets. It takes a series of x-values and two series of y-values. It also takes a facecolor to use for the fill, and an optional alpha argument that controls the color’s transparency.</p>
+                <pre>ax.fill_between(x_values, cubes, squares,
+        facecolor='blue', alpha=0.25)</pre>
+            </div>
+        </section>
+
+        <!-- WORKING WITH DATES AND TIMES -->
+        <section id="dates-times">
+            <h2 class="main-topic-header">Working with dates and times</h2>
+            <p class="intro-text">Many interesting data sets have a date or time as the x value. Python’s datetime module helps you work with this kind of data.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Generating the current date</h3>
+                <p class="intro-text">The datetime.now() function returns a datetime object representing the current date and time.</p>
+                <pre>from datetime import datetime as dt
+
+today = dt.now()
+date_string = today.strftime('%m/%d/%Y')
+print(date_string)</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Generating a specific date</h3>
+                <p class="intro-text">You can also generate a datetime object for any date and time you want. The positional order of arguments is year, month, and day. The hour, minute, second, and microsecond arguments are optional.</p>
+                <pre>from datetime import datetime as dt
+
+new_years = dt(2023, 1, 1)
+fall_equinox = dt(year=2023, month=9, day=22)</pre>
+            </div>
+        </section>
+
+        <!-- WORKING WITH DATES AND TIMES (CONT.) -->
+        <section id="dates-times-cont">
+            <h2 class="main-topic-header">Working with dates and times (cont.)</h2>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Datetime formatting arguments</h3>
+                <p class="intro-text">The strptime() function generates a datetime object from a string, and the strftime() method generates a formatted string from a datetime object. The following codes let you work with dates exactly as you need to.</p>
+                <table>
+                    <tr><td>%A</td><td>Weekday name, such as Monday</td></tr>
+                    <tr><td>%B</td><td>Month name, such as January</td></tr>
+                    <tr><td>%m</td><td>Month, as a number (01 to 12)</td></tr>
+                    <tr><td>%d</td><td>Day of the month, as a number (01 to 31)</td></tr>
+                    <tr><td>%Y</td><td>Four-digit year, such as 2021</td></tr>
+                    <tr><td>%y</td><td>Two-digit year, such as 21</td></tr>
+                    <tr><td>%H</td><td>Hour, in 24-hour format (00 to 23)</td></tr>
+                    <tr><td>%I</td><td>Hour, in 12-hour format (01 to 12)</td></tr>
+                    <tr><td>%p</td><td>AM or PM</td></tr>
+                    <tr><td>%M</td><td>Minutes (00 to 59)</td></tr>
+                    <tr><td>%S</td><td>Seconds (00 to 61)</td></tr>
+                </table>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Converting a string to a datetime object</h3>
+                <pre>new_years = dt.strptime('1/1/2023', '%m/%d/%Y')</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Converting a datetime object to a string</h3>
+                <pre>ny_string = new_years.strftime('%B %d, %Y')
+print(ny_string)</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Plotting high temperatures</h3>
+                <p class="intro-text">The following code creates a list of dates and a corresponding list of high temperatures. It then plots the high temperatures, with the date labels displayed in a specific format.</p>
+                <pre>from datetime import datetime as dt
+
+import matplotlib.pyplot as plt
+from matplotlib import dates as mdates
+
+dates = [
+    dt(2023, 6, 21), dt(2023, 6, 22),
+    dt(2023, 6, 23), dt(2023, 6, 24),
+    ]
+
+highs = [56, 57, 57, 64]
+
+plt.style.use('seaborn-v0_8')
+fig, ax = plt.subplots()
+ax.plot(dates, highs, c='red')
+
+ax.set_title("Daily High Temps", fontsize=24)
+ax.set_ylabel("Temp (F)", fontsize=16)
+x_axis = ax.get_xaxis()
+x_axis.set_major_formatter(
+        mdates.DateFormatter('%B %d %Y')
+        )
+fig.autofmt_xdate()
+
+plt.show()</pre>
+            </div>
+        </section>
+
+        <!-- MULTIPLE PLOTS IN ONE FIGURE -->
+        <section id="multiple-in-one">
+            <h2 class="main-topic-header">Multiple plots in one figure</h2>
+            <p class="intro-text">You can include as many individual graphs in one figure as you want.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Sharing an x-axis</h3>
+                <p class="intro-text">The following code plots a set of squares and a set of cubes on two separate graphs that share a common x-axis. The plt.subplots() function returns a figure object and a tuple of axes. Each set of axes corresponds to a separate plot in the figure. The first two arguments control the number of rows and columns generated in the figure.</p>
+                <pre>import matplotlib.pyplot as plt
+
+x_values = list(range(11))
+squares = [x**2 for x in x_values]
+cubes = [x**3 for x in x_values]
+
+fig, axs = plt.subplots(2, 1, sharex=True)
+
+axs[0].scatter(x_values, squares)
+axs[0].set_title('Squares')
+
+axs[1].scatter(x_values, cubes, c='red')
+axs[1].set_title('Cubes')
+
+plt.show()</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Sharing a y-axis</h3>
+                <p class="intro-text">To share a y-axis, use the sharey=True argument.</p>
+                <pre>import matplotlib.pyplot as plt
+
+x_values = list(range(11))
+squares = [x**2 for x in x_values]
+cubes = [x**3 for x in x_values]
+
+plt.style.use('seaborn-v0_8')
+fig, axs = plt.subplots(1, 2, sharey=True)
+
+axs[0].scatter(x_values, squares)
+axs[0].set_title('Squares')
+
+axs[1].scatter(x_values, cubes, c='red')
+axs[1].set_title('Cubes')
+
+plt.show()</pre>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('#nav-list li');
+            const sections = document.querySelectorAll('main section');
+            const showAllBtn = document.getElementById('show-all-btn');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const targetId = item.getAttribute('data-target');
+                    
+                    navItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+
+                    sections.forEach(section => {
+                        if (section.id === targetId) {
+                            section.classList.add('visible');
+                        } else {
+                            section.classList.remove('visible');
+                        }
+                    });
+
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            showAllBtn.addEventListener('click', () => {
+                navItems.forEach(i => i.classList.remove('active'));
+                sections.forEach(section => {
+                    section.classList.add('visible');
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+    <script src="../assets/theme.js"></script>
+</body>
+</html>

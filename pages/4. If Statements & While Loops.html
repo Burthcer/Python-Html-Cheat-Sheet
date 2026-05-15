@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginner's Python Cheat Sheet - If Statements and While Loops</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+    <aside>
+        <a href="../index.html" class="back-btn">← Back to Dashboard</a>
+        <h1>If Statements & While Loops</h1>
+        <button id="show-all-btn">Show All Content</button>
+        <nav>
+            <ul id="nav-list">
+                <li data-target="intro" class="active">What are if/while?</li>
+                <li data-target="conditional-tests">Conditional Tests</li>
+                <li data-target="numerical">Numerical Comparisons</li>
+                <li data-target="multiple-conditions">Multiple Conditions</li>
+                <li data-target="boolean">Boolean Values</li>
+                <li data-target="if-statements">If Statements</li>
+                <li data-target="tests-with-lists">Tests with Lists</li>
+                <li data-target="accepting-input">Accepting Input</li>
+                <li data-target="while-loops">While Loops</li>
+                <li data-target="infinite-loops">Avoiding Infinite Loops</li>
+                <li data-target="removing-values">Removing Values from List</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main id="content-area">
+
+        <!-- INTRO -->
+        <section id="intro" class="visible">
+            <h2 class="main-topic-header">What are if statements? What are while loops?</h2>
+            <p class="intro-text">Python's if statements allow you to examine the current state of a program and respond appropriately to that state. You can write a simple if statement that checks one condition, or you can create a complex series of statements that identify the exact conditions you're interested in.</p>
+            <p class="intro-text">while loops run as long as certain conditions remain true. You can use while loops to let your programs run as long as your users want them to.</p>
+        </section>
+
+        <!-- CONDITIONAL TESTS -->
+        <section id="conditional-tests">
+            <h2 class="main-topic-header">Conditional Tests</h2>
+            <p class="intro-text">A conditional test is an expression that can be evaluated as true or false. Python uses the values True and False to decide whether the code in an if statement should be executed.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Checking for equality</h3>
+                <p class="intro-text">A single equal sign assigns a value to a variable. A double equal sign checks whether two values are equal. If your conditional tests aren't doing what you expect them to, make sure you're not accidentally using a single equal sign.</p>
+                <pre>>>> car = 'bmw'
+>>> car == 'bmw'
+True
+>>> car = 'audi'
+>>> car == 'bmw'
+False</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Ignoring case when making a comparison</h3>
+                <pre>>>> car = 'Audi'
+>>> car.lower() == 'audi'
+True</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Checking for inequality</h3>
+                <pre>>>> topping = 'mushrooms'
+>>> topping != 'anchovies'
+True</pre>
+            </div>
+        </section>
+
+        <!-- NUMERICAL COMPARISONS -->
+        <section id="numerical">
+            <h2 class="main-topic-header">Numerical comparisons</h2>
+            <p class="intro-text">Testing numerical values is similar to testing string values.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Testing equality and inequality</h3>
+                <pre>>>> age = 18
+>>> age == 18
+True
+>>> age != 18
+False</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Comparison operators</h3>
+                <pre>>>> age = 19
+>>> age < 21
+True
+>>> age <= 21
+True
+>>> age > 21
+False
+>>> age >= 21
+False</pre>
+            </div>
+        </section>
+
+        <!-- MULTIPLE CONDITIONS -->
+        <section id="multiple-conditions">
+            <h2 class="main-topic-header">Checking multiple conditions</h2>
+            <p class="intro-text">You can check multiple conditions at the same time. The and operator returns True if all the conditions listed are true. The or operator returns True if any condition is true.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using and to check multiple conditions</h3>
+                <pre>>>> age_0 = 22
+>>> age_1 = 18
+>>> age_0 >= 21 and age_1 >= 21
+False
+>>> age_1 = 23
+>>> age_0 >= 21 and age_1 >= 21
+True</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using or to check multiple conditions</h3>
+                <pre>>>> age_0 = 22
+>>> age_1 = 18
+>>> age_0 >= 21 or age_1 >= 21
+True
+>>> age_0 = 18
+>>> age_0 >= 21 or age_1 >= 21
+False</pre>
+            </div>
+        </section>
+
+        <!-- BOOLEAN VALUES -->
+        <section id="boolean">
+            <h2 class="main-topic-header">Boolean values</h2>
+            <p class="intro-text">A boolean value is either True or False. Variables with boolean values are often used to keep track of certain conditions within a program.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Simple boolean values</h3>
+                <pre>game_active = True
+is_valid = True
+can_edit = False</pre>
+            </div>
+        </section>
+
+        <!-- IF STATEMENTS -->
+        <section id="if-statements">
+            <h2 class="main-topic-header">If statements</h2>
+            <p class="intro-text">Several kinds of if statements exist. Your choice of which to use depends on the number of conditions you need to test. You can have as many elif blocks as you need, and the else block is always optional.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Simple if statement</h3>
+                <pre>age = 19
+
+if age >= 18:
+    print("You're old enough to vote!")</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">If-else statements</h3>
+                <pre>age = 17
+
+if age >= 18:
+    print("You're old enough to vote!")
+else:
+    print("You can't vote yet.")</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">The if-elif-else chain</h3>
+                <pre>age = 12
+
+if age < 4:
+    price = 0
+elif age < 18:
+    price = 25
+else:
+    price = 40
+
+print(f"Your cost is ${price}.")</pre>
+            </div>
+        </section>
+
+        <!-- TESTS WITH LISTS -->
+        <section id="tests-with-lists">
+            <h2 class="main-topic-header">Conditional tests with lists</h2>
+            <p class="intro-text">You can easily test whether a certain value is in a list. You can also test whether a list is empty before trying to loop through the list.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Testing if a value is in a list</h3>
+                <pre>>>> players = ['al', 'bea', 'cyn', 'dale']
+>>> 'al' in players
+True
+>>> 'eric' in players
+False</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Testing if two values are in a list</h3>
+                <pre>>>> 'al' in players and 'cyn' in players
+True</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Testing if a value is not in a list</h3>
+                <pre>banned_users = ['ann', 'chad', 'dee']
+user = 'erin'
+
+if user not in banned_users:
+    print("You can play!")</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Checking if a list is empty</h3>
+                <p class="intro-text">An empty list evaluates as False in an if statement.</p>
+                <pre>players = []
+
+if players:
+    for player in players:
+        print(f"Player: {player.title()}")
+else:
+    print("We have no players yet!")</pre>
+            </div>
+        </section>
+
+        <!-- ACCEPTING INPUT -->
+        <section id="accepting-input">
+            <h2 class="main-topic-header">Accepting input</h2>
+            <p class="intro-text">You can allow your users to enter input using the input() function. All input is initially stored as a string. If you want to accept numerical input, you'll need to convert the input string value to a numerical type.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Simple input</h3>
+                <pre>name = input("What's your name? ")
+print(f"Hello, {name}.")</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Accepting numerical input using int()</h3>
+                <pre>age = input("How old are you? ")
+age = int(age)
+
+if age >= 18:
+    print("\nYou can vote!")
+else:
+    print("\nSorry, you can't vote yet.")</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Accepting numerical input using float()</h3>
+                <pre>tip = input("How much do you want to tip? ")
+tip = float(tip)
+print(f"Tipped ${tip}.")</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Accepting input with Sublime Text</h3>
+                <div class="note-box">
+                    Sublime Text, and a number of other text editors can't run programs that prompt the user for input. You can use these editors to write programs that prompt for input, but you'll need to run them from a terminal.
+                </div>
+            </div>
+        </section>
+
+        <!-- WHILE LOOPS -->
+        <section id="while-loops">
+            <h2 class="main-topic-header">While loops</h2>
+            <p class="intro-text">A while loop repeats a block of code as long as a condition is true.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Counting to 5</h3>
+                <pre>current_number = 1
+
+while current_number <= 5:
+    print(current_number)
+    current_number += 1</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Letting the user choose when to quit</h3>
+                <pre>prompt = "\nTell me something, and I'll "
+prompt += "repeat it back to you."
+prompt += "\nEnter 'quit' to end the program. "
+
+message = ""
+while message != 'quit':
+    message = input(prompt)
+    
+    if message != 'quit':
+        print(message)</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using a flag</h3>
+                <p class="intro-text">Flags are most useful in long-running programs where code from other parts of the program might need to end the loop.</p>
+                <pre>prompt = "\nTell me something, and I'll "
+prompt += "repeat it back to you."
+prompt += "\nEnter 'quit' to end the program. "
+
+active = True
+while active:
+    message = input(prompt)
+    
+    if message == 'quit':
+        active = False
+    else:
+        print(message)</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using break to exit a loop</h3>
+                <pre>prompt = "\nWhat cities have you visited?"
+prompt += "\nEnter 'quit' when you're done. "
+
+while True:
+    city = input(prompt)
+    
+    if city == 'quit':
+        break
+    else:
+        print(f"I've been to {city.title()}!")</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Breaking out of loops</h3>
+                <div class="note-box">
+                    You can use the break statement and the continue statement with any of Python's loops. For example you can use break to quit a for loop that's working through a list or a dictionary. You can use continue to skip over certain items when looping through a list or dictionary as well.
+                </div>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using continue in a loop</h3>
+                <pre>banned_users = ['eve', 'fred', 'gary', 'helen']
+
+prompt = "\nAdd a player to your team."
+prompt += "\nEnter 'quit' when you're done. "
+
+players = []
+while True:
+    player = input(prompt)
+    if player == 'quit':
+        break
+    elif player in banned_users:
+        print(f"{player} is banned!")
+        continue
+    else:
+        players.append(player)
+
+print("\nYour team:")
+for player in players:
+    print(player)</pre>
+            </div>
+        </section>
+
+        <!-- INFINITE LOOPS -->
+        <section id="infinite-loops">
+            <h2 class="main-topic-header">Avoiding infinite loops</h2>
+            <p class="intro-text">Every while loop needs a way to stop running so it won't continue to run forever. If there's no way for the condition to become false, the loop will never stop running. You can usually press Ctrl-C to stop an infinite loop.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">An infinite loop</h3>
+                <pre>while True:
+    name = input("\nWho are you? ")
+    print(f"Nice to meet you, {name}!")</pre>
+            </div>
+        </section>
+
+        <!-- REMOVING VALUES FROM LIST -->
+        <section id="removing-values">
+            <h2 class="main-topic-header">Removing all instances of a value from a list</h2>
+            <p class="intro-text">The remove() method removes a specific value from a list, but it only removes the first instance of the value you provide. You can use a while loop to remove all instances of a particular value.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Removing all cats from a list of pets</h3>
+                <pre>pets = ['dog', 'cat', 'dog', 'fish', 'cat',
+        'rabbit', 'cat']
+print(pets)
+
+while 'cat' in pets:
+    pets.remove('cat')
+
+print(pets)</pre>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('#nav-list li');
+            const sections = document.querySelectorAll('main section');
+            const showAllBtn = document.getElementById('show-all-btn');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const targetId = item.getAttribute('data-target');
+                    
+                    navItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+
+                    sections.forEach(section => {
+                        if (section.id === targetId) {
+                            section.classList.add('visible');
+                        } else {
+                            section.classList.remove('visible');
+                        }
+                    });
+
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            showAllBtn.addEventListener('click', () => {
+                navItems.forEach(i => i.classList.remove('active'));
+                sections.forEach(section => {
+                    section.classList.add('visible');
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+    <script src="../assets/theme.js"></script>
+</body>
+</html>

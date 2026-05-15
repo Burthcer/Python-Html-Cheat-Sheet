@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginner's Python Cheat Sheet - Dictionaries & Nesting</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+    <aside>
+        <a href="../index.html" class="back-btn">← Back to Dashboard</a>
+        <h1>Beginner's Python Cheat Sheet - Dictionaries</h1>
+        <button id="show-all-btn">Show All Content</button>
+        <nav>
+            <ul id="nav-list">
+                <li data-target="what-are-dicts">What are dictionaries?</li>
+                <li data-target="defining-dict">Defining a dictionary</li>
+                <li data-target="accessing-values">Accessing values</li>
+                <li data-target="adding-pairs">Adding new key-value pairs</li>
+                <li data-target="modifying-values">Modifying values</li>
+                <li data-target="removing-pairs">Removing key-value pairs</li>
+                <li data-target="visualizing-dicts">Visualizing dictionaries</li>
+                <li data-target="looping-dict">Looping through a dictionary</li>
+                <li data-target="dict-length">Dictionary length</li>
+                <li data-target="nesting-list">Nesting - A list of dictionaries</li>
+                <li data-target="nesting-dict-list">Nesting - Lists in a dictionary</li>
+                <li data-target="nesting-dict-dict">Nesting - A dictionary of dictionaries</li>
+                <li data-target="levels-nesting">Levels of nesting</li>
+                <li data-target="dict-comprehensions">Dictionary Comprehensions</li>
+                <li data-target="million-dicts">Generating a million dictionaries</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main id="content-area">
+
+        <!-- WHAT ARE DICTIONARIES -->
+        <section id="what-are-dicts" class="visible">
+            <h2 class="main-topic-header">What are dictionaries?</h2>
+            <p class="intro-text">Python's dictionaries allow you to connect pieces of related information. Each piece of information in a dictionary is stored as a key-value pair. When you provide a key, Python returns the value associated with that key. You can loop through all the key-value pairs, all the keys, or all the values.</p>
+        </section>
+
+        <!-- DEFINING A DICTIONARY -->
+        <section id="defining-dict">
+            <h2 class="main-topic-header">Defining a dictionary</h2>
+            <p class="intro-text">Use curly braces to define a dictionary. Use colons to connect keys and values, and use commas to separate individual key-value pairs.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Making a dictionary</h3>
+                <pre>alien_0 = {'color': 'green', 'points': 5}</pre>
+            </div>
+        </section>
+
+        <!-- ACCESSING VALUES -->
+        <section id="accessing-values">
+            <h2 class="main-topic-header">Accessing values</h2>
+            <p class="intro-text">To access the value associated with an individual key give the name of the dictionary and then place the key in a set of square brackets. If the key you provided is not in the dictionary, an error will occur.
+            <br><br>You can also use the get() method, which returns None instead of an error if the key doesn't exist. You can also specify a default value to use if the key is not in the dictionary.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Getting the value associated with a key</h3>
+                <pre>alien_0 = {'color': 'green', 'points': 5}
+
+print(alien_0['color'])
+print(alien_0['points'])</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Getting the value with get()</h3>
+                <pre>alien_0 = {'color': 'green'}
+
+alien_color = alien_0.get('color')
+alien_points = alien_0.get('points', 0)
+alien_speed = alien_0.get('speed')
+
+print(alien_color)
+print(alien_points)
+print(alien_speed)</pre>
+            </div>
+        </section>
+
+        <!-- ADDING KEY-VALUE PAIRS -->
+        <section id="adding-pairs">
+            <h2 class="main-topic-header">Adding new key-value pairs</h2>
+            <p class="intro-text">You can store as many key-value pairs as you want in a dictionary, until your computer runs out of memory. To add a new key-value pair to an existing dictionary give the name of the dictionary and the new key in square brackets, and set it equal to the new value.
+            <br><br>This also allows you to start with an empty dictionary and add key-value pairs as they become relevant.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Adding a key-value pair</h3>
+                <pre>alien_0 = {'color': 'green', 'points': 5}
+
+alien_0['x'] = 0
+alien_0['y'] = 25
+alien_0['speed'] = 1.5</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Starting with an empty dictionary</h3>
+                <pre>alien_0 = {}
+alien_0['color'] = 'green'
+alien_0['points'] = 5</pre>
+            </div>
+        </section>
+
+        <!-- MODIFYING VALUES -->
+        <section id="modifying-values">
+            <h2 class="main-topic-header">Modifying values</h2>
+            <p class="intro-text">You can modify the value associated with any key in a dictionary. To do so give the name of the dictionary and the key in square brackets, then provide the new value for that key.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Modifying values in a dictionary</h3>
+                <pre>alien_0 = {'color': 'green', 'points': 5}
+print(alien_0)
+
+# Change the alien's color and point value.
+alien_0['color'] = 'yellow'
+alien_0['points'] = 10
+print(alien_0)</pre>
+            </div>
+        </section>
+
+        <!-- REMOVING KEY-VALUE PAIRS -->
+        <section id="removing-pairs">
+            <h2 class="main-topic-header">Removing key-value pairs</h2>
+            <p class="intro-text">You can remove any key-value pair you want from a dictionary. To do this use the del keyword and the dictionary name, followed by the key in square brackets. This will delete the key and its associated value.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Deleting a key-value pair</h3>
+                <pre>alien_0 = {'color': 'green', 'points': 5}
+print(alien_0)
+
+del alien_0['points']
+print(alien_0)</pre>
+            </div>
+        </section>
+
+        <!-- VISUALIZING DICTIONARIES -->
+        <section id="visualizing-dicts">
+            <h2 class="main-topic-header">Visualizing dictionaries</h2>
+            <p class="intro-text">Try running some of these examples on pythontutor.com, and then run one of your own programs that uses dictionaries.</p>
+        </section>
+
+        <!-- LOOPING THROUGH A DICTIONARY -->
+        <section id="looping-dict">
+            <h2 class="main-topic-header">Looping through a dictionary</h2>
+            <p class="intro-text">You can loop through a dictionary in three ways: you can loop through all the key-value pairs, all the keys, or all the values.
+            <br><br>Dictionaries keep track of the order in which key-value pairs are added. If you want to process the information in a different order, you can sort the keys in your loop, using the sorted() function.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Looping through all key-value pairs</h3>
+                <pre># Store people's favorite languages.
+fav_languages = {
+    'jen': 'python',
+    'sarah': 'c',
+    'edward': 'ruby',
+    'phil': 'python',
+}
+
+# Show each person's favorite language.
+for name, language in fav_languages.items():
+    print(f"{name}: {language}")</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Looping through all the keys</h3>
+                <pre># Show everyone who's taken the survey.
+for name in fav_languages.keys():
+    print(name)</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Looping through all the values</h3>
+                <pre># Show all the languages that have been chosen.
+for language in fav_languages.values():
+    print(language)</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Looping through all the keys in reverse order</h3>
+                <pre># Show each person's favorite language,
+# in reverse order by the person's name.
+for name in sorted(fav_languages.keys(),
+        reverse=True):
+    language = fav_languages[name]
+    print(f"{name}: {language}")</pre>
+            </div>
+        </section>
+
+        <!-- DICTIONARY LENGTH -->
+        <section id="dict-length">
+            <h2 class="main-topic-header">Dictionary length</h2>
+            <p class="intro-text">You can find the number of key-value pairs in a dictionary using the len() function.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Finding a dictionary's length</h3>
+                <pre>num_responses = len(fav_languages)</pre>
+            </div>
+        </section>
+
+        <!-- NESTING - A LIST OF DICTIONARIES -->
+        <section id="nesting-list">
+            <h2 class="main-topic-header">Nesting - A list of dictionaries</h2>
+            <p class="intro-text">It's sometimes useful to store a number of dictionaries in a list; this is called nesting.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Storing dictionaries in a list</h3>
+                <pre># Start with an empty list.
+users = []
+
+# Make a new user, and add them to the list.
+new_user = {
+    'last': 'fermi',
+    'first': 'enrico',
+    'username': 'efermi',
+}
+users.append(new_user)
+
+# Make another new user, and add them as well.
+new_user = {
+    'last': 'curie',
+    'first': 'marie',
+    'username': 'mcurie',
+}
+users.append(new_user)
+
+# Show all information about each user.
+print("User summary:")
+for user_dict in users:
+    for k, v in user_dict.items():
+        print(f"{k}: {v}")
+    print("\n")</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Defining a list of dictionaries directly</h3>
+                <pre># Define a list of users, where each user
+# is represented by a dictionary.
+users = [
+    {
+        'last': 'fermi',
+        'first': 'enrico',
+        'username': 'efermi',
+    },
+    {
+        'last': 'curie',
+        'first': 'marie',
+        'username': 'mcurie',
+    },
+]
+
+# Show all information about each user.
+print("User summary:")
+for user_dict in users:
+    for k, v in user_dict.items():
+        print(f"{k}: {v}")
+    print("\n")</pre>
+            </div>
+        </section>
+
+        <!-- NESTING - LISTS IN A DICTIONARY -->
+        <section id="nesting-dict-list">
+            <h2 class="main-topic-header">Nesting - Lists in a dictionary</h2>
+            <p class="intro-text">Storing a list inside a dictionary allows you to associate more than one value with each key.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Storing lists in a dictionary</h3>
+                <pre># Store multiple languages for each person.
+fav_languages = {
+    'jen': ['python', 'ruby'],
+    'sarah': ['c'],
+    'edward': ['ruby', 'go'],
+    'phil': ['python', 'haskell'],
+}
+
+# Show all responses for each person.
+for name, langs in fav_languages.items():
+    print(f"{name}: ")
+    for lang in langs:
+        print(f"- {lang}")</pre>
+            </div>
+        </section>
+
+        <!-- NESTING - A DICTIONARY OF DICTIONARIES -->
+        <section id="nesting-dict-dict">
+            <h2 class="main-topic-header">Nesting - A dictionary of dictionaries</h2>
+            <p class="intro-text">You can store a dictionary inside another dictionary. In this case each value associated with a key is itself a dictionary.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Storing dictionaries in a dictionary</h3>
+                <pre>users = {
+    'aeinstein': {
+        'first': 'albert',
+        'last': 'einstein',
+        'location': 'princeton',
+    },
+    'mcurie': {
+        'first': 'marie',
+        'last': 'curie',
+        'location': 'paris',
+    },
+}
+
+for username, user_dict in users.items():
+    full_name = f"{user_dict['first']} "
+    full_name += user_dict['last']
+    location = user_dict['location']
+
+    print(f"\nUsername: {username}")
+    print(f"\tFull name: {full_name.title()}")
+    print(f"\tLocation: {location.title()}")</pre>
+            </div>
+        </section>
+
+        <!-- LEVELS OF NESTING -->
+        <section id="levels-nesting">
+            <h2 class="main-topic-header">Levels of nesting</h2>
+            <div class="info-box">
+                Nesting is extremely useful in certain situations. However, be aware of making your code overly complex. If you're nesting items much deeper than what you see here there are probably simpler ways of managing your data, such as using classes.
+            </div>
+        </section>
+
+        <!-- DICTIONARY COMPREHENSIONS -->
+        <section id="dict-comprehensions">
+            <h2 class="main-topic-header">Dictionary Comprehensions</h2>
+            <p class="intro-text">A comprehension is a compact way of generating a dictionary, similar to a list comprehension. To make a dictionary comprehension, define an expression for the key-value pairs you want to make. Then write a for loop to generate the values that will feed into this expression.
+            <br><br>The zip() function matches each item in one list to each item in a second list. It can be used to make a dictionary from two lists.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using a loop to make a dictionary</h3>
+                <pre>squares = {}
+for x in range(5):
+    squares[x] = x**2</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using a dictionary comprehension</h3>
+                <pre>squares = {x:x**2 for x in range(5)}</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using zip() to make a dictionary</h3>
+                <pre>group_1 = ['kai', 'abe', 'ada', 'gus', 'zoe']
+group_2 = ['jen', 'eva', 'dan', 'isa', 'meg']
+
+pairings = {name:name_2
+    for name, name_2 in zip(group_1, group_2)}</pre>
+            </div>
+        </section>
+
+        <!-- GENERATING A MILLION DICTIONARIES -->
+        <section id="million-dicts">
+            <h2 class="main-topic-header">Generating a million dictionaries</h2>
+            <p class="intro-text">You can use a loop to generate a large number of dictionaries efficiently, if all the dictionaries start out with similar data.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">A million aliens</h3>
+                <pre>aliens = []
+
+# Make a million green aliens, worth 5 points
+# each. Have them all start in one row.
+for alien_num in range(1_000_000):
+    new_alien = {
+        'color': 'green',
+        'points': 5,
+        'x': 20 * alien_num,
+        'y': 0
+    }
+    aliens.append(new_alien)
+
+# Prove the list contains a million aliens.
+num_aliens = len(aliens)
+
+print("Number of aliens created:")
+print(num_aliens)</pre>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('#nav-list li');
+            const sections = document.querySelectorAll('main section');
+            const showAllBtn = document.getElementById('show-all-btn');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const targetId = item.getAttribute('data-target');
+                    
+                    navItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+
+                    sections.forEach(section => {
+                        if (section.id === targetId) {
+                            section.classList.add('visible');
+                        } else {
+                            section.classList.remove('visible');
+                        }
+                    });
+
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            showAllBtn.addEventListener('click', () => {
+                navItems.forEach(i => i.classList.remove('active'));
+                sections.forEach(section => {
+                    section.classList.add('visible');
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+    <script src="../assets/theme.js"></script>
+</body>
+</html>

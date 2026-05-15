@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginner's Python Cheat Sheet - Testing Your Code</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+    <aside>
+        <a href="../index.html" class="back-btn">← Back to Dashboard</a>
+        <h1>Testing Your Code</h1>
+        <button id="show-all-btn">Show All Content</button>
+        <nav>
+            <ul id="nav-list">
+                <li data-target="why-test" class="active">Why test your code?</li>
+                <li data-target="passing-test">Testing a function: passing</li>
+                <li data-target="installing-pytest">Installing pytest</li>
+                <li data-target="testing-cont">Testing a function (cont.)</li>
+                <li data-target="failing-test">Testing a function: failing</li>
+                <li data-target="failing-cont">A failing test (cont.)</li>
+                <li data-target="fixing-code">Fixing the code</li>
+                <li data-target="running-final">Running the test (final)</li>
+                <li data-target="new-tests">Adding new tests</li>
+                <li data-target="asserts">Variety of asserts</li>
+                <li data-target="one-file">Running from one file</li>
+                <li data-target="testing-class">Testing a class</li>
+                <li data-target="modify-tests">Modifying tests?</li>
+                <li data-target="fixtures">Using fixtures</li>
+                <li data-target="pytest-flags">pytest flags</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main id="content-area">
+
+        <!-- WHY TEST YOUR CODE -->
+        <section id="why-test" class="visible">
+            <h2 class="main-topic-header">Why test your code?</h2>
+            <div class="note-box">
+                When you write a function or a class, you can also write tests for that code. Testing proves that your code works as it's supposed to in the situations it's designed to handle, and also when people use your programs in unexpected ways. Writing tests gives you confidence that your code will work correctly as more people begin to use your programs. You can also add new features to your programs and know whether or not you've broken existing behavior by running your tests.
+                <br><br>
+                A <em>unit test</em> verifies that one specific aspect of your code works as it's supposed to. A <em>test case</em> is a collection of unit tests which verify that your code's behavior is correct in a wide variety of situations.
+                <br><br>
+                <em>The output in some sections has been trimmed for space.</em>
+            </div>
+        </section>
+
+        <!-- PASSING TEST -->
+        <section id="passing-test">
+            <h2 class="main-topic-header">Testing a function: a passing test</h2>
+            <p class="intro-text">The pytest library provides tools for testing your code. To try it out, we'll create a function that returns a full name. We'll use the function in a regular program, and then build a test case for the function.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">A function to test</h3>
+                <p class="intro-text">Save this as full_names.py</p>
+                <pre>def get_full_name(first, last):
+    """Return a full name."""
+    full_name = f"{first} {last}"
+    return full_name.title()</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using the function</h3>
+                <p class="intro-text">Save this as names.py</p>
+                <pre>from full_names import get_full_name
+
+janis = get_full_name('janis', 'joplin')
+print(janis)
+
+bob = get_full_name('bob', 'dylan')
+print(bob)</pre>
+            </div>
+        </section>
+
+        <!-- INSTALLING PYTEST -->
+        <section id="installing-pytest">
+            <h2 class="main-topic-header">Installing pytest</h2>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Installing pytest with pip</h3>
+                <pre class="terminal">$ python -m pip install --user pytest</pre>
+            </div>
+        </section>
+
+        <!-- TESTING CONT -->
+        <section id="testing-cont">
+            <h2 class="main-topic-header">Testing a function (cont.)</h2>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Building a testcase with one unit test</h3>
+                <p class="intro-text">To build a test case, import the function you want to test. Any functions that begin with test_ will be run by pytest. Save this file as test_full_names.py.</p>
+                <pre>from full_names import get_full_name
+
+def test_first_last():
+    """Test names like Janis Joplin."""
+    full_name = get_full_name('janis', 'joplin')
+    assert full_name == 'Janis Joplin'</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Running the test</h3>
+                <p class="intro-text">Issuing the pytest command tells pytest to run any file beginning with test_. pytest reports on each test in the test case.
+                <br>The dot after test_full_names.py represents a single passing test. pytest informs us that it ran 1 test in about 0.01 seconds, and that the test passed.</p>
+                <pre class="terminal">$ pytest
+============= test session starts =============
+platform darwin -- Python 3.11.0, pytest-7.1.2
+rootdir: /.../testing_your_code
+collected 1 item
+
+test_full_names.py .                     [100%]
+============= 1 passed in 0.01s =============</pre>
+            </div>
+        </section>
+
+        <!-- FAILING TEST -->
+        <section id="failing-test">
+            <h2 class="main-topic-header">Testing a function: A failing test</h2>
+            <p class="intro-text">Failing tests are important; they tell you that a change in the code has affected existing behavior. When a test fails, you need to modify the code so the existing behavior still works.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Modifying the function</h3>
+                <p class="intro-text">We'll modify get_full_name() so it handles middle names, but we'll do it in a way that breaks existing behavior.</p>
+                <pre>def get_full_name(first, middle, last):
+    """Return a full name."""
+    full_name = f"{first} {middle} {last}"
+    return full_name.title()</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using the function</h3>
+                <pre>from full_names import get_full_name
+
+john = get_full_name('john', 'lee', 'hooker')
+print(john)
+
+david = get_full_name('david', 'lee', 'roth')
+print(david)</pre>
+            </div>
+        </section>
+
+        <!-- FAILING CONT -->
+        <section id="failing-cont">
+            <h2 class="main-topic-header">A failing test (cont.)</h2>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Running the test</h3>
+                <p class="intro-text">When you change your code, it's important to run your existing tests. This will tell you whether the changes you made affect existing behavior.</p>
+                <pre class="terminal">$ pytest
+============= test session starts =============
+test_full_names.py F                     [100%]
+
+_________________ FAILURES _________________
+________________ test_first_last ________________
+>       full_name = get_full_name('janis',
+                                  'joplin')
+E       TypeError: get_full_name() missing 1
+        required positional argument: 'last'
+
+========== short test summary info ==========
+FAILED test_full_names.py::test_first_last...
+
+============= 1 failed in 0.04s =============</pre>
+            </div>
+        </section>
+
+        <!-- FIXING CODE -->
+        <section id="fixing-code">
+            <h2 class="main-topic-header">Fixing the code</h2>
+            <p class="intro-text">When a test fails, the code needs to be modified until the test passes again. Don't make the mistake of rewriting your tests to fit your new code, otherwise your code will break for anyone who's using it the same way it's being used in the failing test.
+            <br>Here we can make the middle name optional:</p>
+            <pre>def get_full_name(first, last, middle=''):
+    """Return a full name."""
+
+    if middle:
+        full_name = f"{first} {middle} {last}"
+    else:
+        full_name = f"{first} {last}"
+    
+    return full_name.title()</pre>
+        </section>
+
+        <!-- RUNNING FINAL -->
+        <section id="running-final">
+            <h2 class="main-topic-header">Running the test</h2>
+            <p class="intro-text">Now the test should pass again, which means our original functionality is still intact.</p>
+            <pre class="terminal">$ pytest
+============= test session starts =============
+test_full_names.py .                     [100%]
+
+============= 1 passed in 0.01s =============</pre>
+        </section>
+
+        <!-- ADDING NEW TESTS -->
+        <section id="new-tests">
+            <h2 class="main-topic-header">Adding new tests</h2>
+            <p class="intro-text">You can add as many unit tests to a test case as you need. To write a new test, add a new function to your test file. If the file grows too long, you can add as many files as you need.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Testing middle names</h3>
+                <p class="intro-text">We've shown that get_full_name() works for first and last names. Let's test that it works for middle names as well.</p>
+                <pre>from full_names import get_full_name
+
+def test_first_last():
+    """Test names like Janis Joplin."""
+    full_name = get_full_name('janis', 'joplin')
+    assert full_name == 'Janis Joplin'
+
+def test_middle():
+    """Test names like David Lee Roth."""
+    full_name = get_full_name('david', 'roth', 'lee')
+    assert full_name == 'David Lee Roth'</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Running the tests</h3>
+                <p class="intro-text">The two dots after test_full_names.py represent two passing tests.</p>
+                <pre class="terminal">$ pytest
+============= test session starts =============
+collected 2 items
+test_full_names.py ..                    [100%]
+
+============= 2 passed in 0.01s =============</pre>
+            </div>
+        </section>
+
+        <!-- ASSERTS -->
+        <section id="asserts">
+            <h2 class="main-topic-header">A variety of assert statements</h2>
+            <p class="intro-text">You can use assert statements in a variety of ways, to check for the exact conditions you want to verify.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Verify that a==b, or a != b</h3>
+                <pre>assert a == b
+assert a != b</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Verify that x is True, or x is False</h3>
+                <pre>assert x
+assert not x</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Verify an item is in a list, or not in a list</h3>
+                <pre>assert my_item in my_list
+assert my_item not in my_list</pre>
+            </div>
+        </section>
+
+        <!-- RUNNING FROM ONE FILE -->
+        <section id="one-file">
+            <h2 class="main-topic-header">Running tests from one file</h2>
+            <p class="intro-text">In a growing test suite, you can have multiple test files. Sometimes you'll only want to run the tests from one file. You can pass the name of a file, and pytest will only run the tests in that file:</p>
+            <pre class="terminal">$ pytest test_names_function.py</pre>
+        </section>
+
+        <!-- TESTING A CLASS -->
+        <section id="testing-class">
+            <h2 class="main-topic-header">Testing a class</h2>
+            <p class="intro-text">Testing a class is similar to testing a function, since you'll mostly be testing its methods.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">A class to test</h3>
+                <p class="intro-text">Save as account.py</p>
+                <pre>class Account():
+    """Manage a bank account."""
+
+    def __init__(self, balance=0):
+        """Set the initial balance."""
+        self.balance = balance
+
+    def deposit(self, amount):
+        """Add to the balance."""
+        self.balance += amount
+
+    def withdraw(self, amount):
+        """Subtract from the balance."""
+        self.balance -= amount</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Building a testcase</h3>
+                <p class="intro-text">For the first test, we'll make sure we can start out with different initial balances. Save this as test_accountant.py.</p>
+                <pre>from account import Account
+
+def test_initial_balance():
+    """Default balance should be 0."""
+    account = Account()
+    assert account.balance == 0
+
+def test_deposit():
+    """Test a single deposit."""
+    account = Account()
+    account.deposit(100)
+    assert account.balance == 100</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Running the test</h3>
+                <pre class="terminal">$ pytest
+============= test session starts =============
+collected 2 items
+test_account.py ..                       [100%]
+
+============= 2 passed in 0.01s =============</pre>
+            </div>
+        </section>
+
+        <!-- MODIFY TESTS -->
+        <section id="modify-tests">
+            <h2 class="main-topic-header">When is it okay to modify tests?</h2>
+            <div class="note-box">
+                In general you shouldn't modify a test once it's written. When a test fails it usually means new code you've written has broken existing functionality, and you need to modify the new code until all existing tests pass.
+                <br><br>
+                If your original requirements have changed, it may be appropriate to modify some tests. This usually happens in the early stages of a project when desired behavior is still being sorted out, and no one is using your code yet.
+            </div>
+        </section>
+
+        <!-- FIXTURES -->
+        <section id="fixtures">
+            <h2 class="main-topic-header">Using fixtures</h2>
+            <p class="intro-text">A fixture is a resource that's used in multiple tests. When the name of a fixture function is used as an argument to a test function, the return value of the fixture is passed to the test function.
+            <br>When testing a class, you often have to make an instance of the class. Fixtures let you work with just one instance.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using fixtures to support multiple tests</h3>
+                <p class="intro-text">The instance acc can be used in each new test.</p>
+                <pre>import pytest
+from account import Account
+
+@pytest.fixture
+def account():
+    account = Account()
+    return account
+
+def test_initial_balance(account):
+    """Default balance should be 0."""
+    assert account.balance == 0
+
+def test_deposit(account):
+    """Test a single deposit."""
+    account.deposit(100)
+    assert account.balance == 100
+
+def test_withdrawal(account):
+    """Test a deposit followed by withdrawal."""
+    account.deposit(1_000)
+    account.withdraw(100)
+    assert account.balance == 900</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Running the tests</h3>
+                <pre class="terminal">$ pytest
+============= test session starts =============
+collected 3 items
+test_account.py ...                      [100%]
+
+============= 3 passed in 0.01s =============</pre>
+            </div>
+        </section>
+
+        <!-- PYTEST FLAGS -->
+        <section id="pytest-flags">
+            <h2 class="main-topic-header">pytest flags</h2>
+            <p class="intro-text">pytest has some flags that can help you run your tests efficiently, even as the number of tests in your project grows.</p>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Stop at the first failing test</h3>
+                <pre class="terminal">$ pytest -x</pre>
+            </div>
+            <div class="subtopic">
+                <h3 class="subtopic-header">Only run tests that failed during the last test run</h3>
+                <pre class="terminal">$ pytest --last-failed</pre>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('#nav-list li');
+            const sections = document.querySelectorAll('main section');
+            const showAllBtn = document.getElementById('show-all-btn');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const targetId = item.getAttribute('data-target');
+                    
+                    navItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+
+                    sections.forEach(section => {
+                        if (section.id === targetId) {
+                            section.classList.add('visible');
+                        } else {
+                            section.classList.remove('visible');
+                        }
+                    });
+
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            showAllBtn.addEventListener('click', () => {
+                navItems.forEach(i => i.classList.remove('active'));
+                sections.forEach(section => {
+                    section.classList.add('visible');
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+    <script src="../assets/theme.js"></script>
+</body>
+</html>

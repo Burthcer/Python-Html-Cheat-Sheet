@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginner's Python Cheat Sheet - Django SPA</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+    <aside>
+        <a href="../index.html" class="back-btn">← Back to Dashboard</a>
+        <h1>Django Cheat Sheet</h1>
+        <button id="show-all-btn">Show All Content</button>
+        <nav>
+            <ul id="nav-list">
+                <li data-target="what-is" class="active">What is Django?</li>
+                <li data-target="installing">Installing Django</li>
+                <li data-target="creating-project">Creating a project</li>
+                <li data-target="models">Working with models</li>
+                <li data-target="home-page">Building a simple home page</li>
+                <li data-target="inheritance">Template Inheritance</li>
+                <li data-target="another-model">Another model</li>
+                <li data-target="page-data">Building a page with data</li>
+                <li data-target="restarting">Restarting the server</li>
+                <li data-target="shell">The Django shell</li>
+                <li data-target="resources">Online resources</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main id="content-area">
+
+        <!-- WHAT IS DJANGO -->
+        <section id="what-is" class="visible">
+            <h2 class="main-topic-header">What is Django?</h2>
+            <p>Django is a web framework that helps you build interactive websites using Python. With Django you define the kind of data your site will work with, and the ways your users can work with that data.</p>
+            <p>Django works well for tiny projects, and just as well for sites with millions of users.</p>
+        </section>
+
+        <!-- INSTALLING DJANGO -->
+        <section id="installing">
+            <h2 class="main-topic-header">Installing Django</h2>
+            <p class="intro-text">It's best to install Django to a virtual environment, where your project can be isolated from your other Python projects. Most commands assume you're working in an active virtual environment.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Create a virtual environment</h3>
+                <pre>$ python -m venv ll_env</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Activate the environment (macOS and Linux)</h3>
+                <pre>$ source ll_env/bin/activate</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Activate the environment (Windows)</h3>
+                <pre>> ll_env\Scripts\activate</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Install Django to the active environment</h3>
+                <pre>(ll_env)$ pip install Django</pre>
+            </div>
+        </section>
+
+        <!-- CREATING A PROJECT -->
+        <section id="creating-project">
+            <h2 class="main-topic-header">Creating a project</h2>
+            <p class="intro-text">To start we'll create a new project, create a database, and start a development server.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Create a new project</h3>
+                <p class="intro-text">Make sure to include the dot at the end of this command.</p>
+                <pre>$ django-admin startproject ll_project .</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Create a database</h3>
+                <pre>$ python manage.py migrate</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">View the project</h3>
+                <p class="intro-text">After issuing this command, you can view the project at http://localhost:8000/.</p>
+                <pre>$ python manage.py runserver</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Create a new app</h3>
+                <p class="intro-text">A Django project is made up of one or more apps.</p>
+                <pre>$ python manage.py startapp learning_logs</pre>
+            </div>
+        </section>
+
+        <!-- WORKING WITH MODELS -->
+        <section id="models">
+            <h2 class="main-topic-header">Working with models</h2>
+            <p class="intro-text">The data in a Django project is structured as a set of models. Each model is represented by a class.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Defining a model</h3>
+                <p class="intro-text">To define the models for your app, modify the models.py file that was created in your app's folder. The __str__() method tells Django how to represent data objects based on this model.</p>
+                <pre>from django.db import models
+
+class Topic(models.Model):
+    """A topic the user is learning about."""
+    text = models.CharField(max_length=200)
+    date_added = models.DateTimeField(
+            auto_now_add=True)
+
+    def __str__(self):
+        return self.text</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Activating a model</h3>
+                <p class="intro-text">To use a model the app must be added to the list INSTALLED_APPS, which is stored in the project's settings.py file.</p>
+                <pre>INSTALLED_APPS = [
+    # My apps.
+    'learning_logs',
+
+    # Default Django apps.
+    'django.contrib.admin',
+]</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Migrating the database</h3>
+                <p class="intro-text">The database needs to be modified to store the kind of data that the model represents. You'll need to run these commands every time you create a new model, or modify an existing model.</p>
+                <pre>$ python manage.py makemigrations learning_logs
+$ python manage.py migrate</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Creating a superuser</h3>
+                <p class="intro-text">A superuser is a user account that has access to all aspects of the project.</p>
+                <pre>$ python manage.py createsuperuser</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Registering a model</h3>
+                <p class="intro-text">You can register your models with Django's admin site, which makes it easier to work with the data in your project. To do this, modify the app's admin.py file. View the admin site at http://localhost:8000/admin/. You'll need to log in using a superuser account.</p>
+                <pre>from django.contrib import admin
+from .models import Topic
+
+admin.site.register(Topic)</pre>
+            </div>
+        </section>
+
+        <!-- HOME PAGE -->
+        <section id="home-page">
+            <h2 class="main-topic-header">Building a simple home page</h2>
+            <p class="intro-text">Users interact with a project through web pages, and a project's home page can start out as a simple page with no data. A page usually needs a URL, a view, and a template.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Mapping a project's URLs</h3>
+                <p class="intro-text">The project's main urls.py file tells Django where to find the urls.py files associated with each app in the project.</p>
+                <pre>from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('learning_logs.urls')),
+]</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Mapping an app's URLs</h3>
+                <p class="intro-text">An app's urls.py file tells Django which view to use for each URL in the app. You'll need to make this file yourself, and save it in the app's folder.</p>
+                <pre>from django.urls import path
+from . import views
+
+app_name = 'learning_logs'
+urlpatterns = [
+    # Home page.
+    path('', views.index, name='index'),
+]</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Writing a simple view</h3>
+                <p class="intro-text">A view takes information from a request and sends data to the browser, often through a template. View functions are stored in an app's views.py file. This simple view function doesn't pull in any data, but it uses the template index.html to render the home page.</p>
+                <pre>from django.shortcuts import render
+
+def index(request):
+    """The home page for Learning Log."""
+    return render(request,
+            'learning_logs/index.html')</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Writing a simple template</h3>
+                <p class="intro-text">A template sets up the structure for a page. It's a mix of html and template code, which is like Python but not as powerful. Most of the logic for your project should be written in .py files, but some logic is appropriate for templates.
+                <br>Make a folder called templates/ inside the project folder. Inside the templates/ folder make another folder with the same name as the app. This is where the template files should be saved. The home page template will be saved as learning_logs/templates/learning_logs/index.html.</p>
+                <pre>&lt;p&gt;Learning Log&lt;/p&gt;
+
+&lt;p&gt;Learning Log helps you keep track of your
+learning, for any topic you're learning
+about.&lt;/p&gt;</pre>
+            </div>
+        </section>
+
+        <!-- TEMPLATE INHERITANCE -->
+        <section id="inheritance">
+            <h2 class="main-topic-header">Template Inheritance</h2>
+            <p class="intro-text">Many elements of a web page are repeated on every page in the site, or every page in a section of the site. By writing one parent template for the site, and one for each section, you can easily modify the look and feel of your entire site.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">The parent template</h3>
+                <p class="intro-text">The parent template defines the elements common to a set of pages, and defines blocks that will be filled by individual pages.</p>
+                <pre>&lt;p&gt;
+  &lt;a href="{% url 'learning_logs:index' %}"&gt;
+    Learning Log
+  &lt;/a&gt;
+&lt;/p&gt;
+
+{% block content %}{% endblock content %}</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">The child template</h3>
+                <p class="intro-text">The child template uses the {% extends %} template tag to pull in the structure of the parent template. It then defines the content for any blocks defined in the parent template.</p>
+                <pre>{% extends 'learning_logs/base.html' %}
+
+{% block content %}
+
+  &lt;p&gt;
+    Learning Log helps you keep track
+    of your learning, for any topic you're
+    learning about.
+  &lt;/p&gt;
+
+{% endblock content %}</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Template indentation</h3>
+                <p class="intro-text">Python code is usually indented by four spaces. In templates you'll often see two spaces used for indentation, because elements tend to be nested more deeply in templates.</p>
+            </div>
+        </section>
+
+        <!-- ANOTHER MODEL -->
+        <section id="another-model">
+            <h2 class="main-topic-header">Another model</h2>
+            <p class="intro-text">A new model can use an existing model. The ForeignKey attribute establishes a connection between instances of the two related models. Make sure to migrate the database after adding a new model to your app.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Defining a model with a foreign key</h3>
+                <pre>class Entry(models.Model):
+    """Learning log entries for a topic."""
+    topic = models.ForeignKey(Topic,
+            on_delete=models.CASCADE)
+    text = models.TextField()
+    date_added = models.DateTimeField(
+            auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.text[:50]}..."</pre>
+            </div>
+        </section>
+
+        <!-- PAGE WITH DATA -->
+        <section id="page-data">
+            <h2 class="main-topic-header">Building a page with data</h2>
+            <p class="intro-text">Most pages in a project need to present data that's specific to the current user.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">URL parameters</h3>
+                <p class="intro-text">A URL often needs to accept a parameter telling it what data to access from the database. The URL pattern shown here looks for the ID of a specific topic and assigns it to the parameter topic_id.</p>
+                <pre>urlpatterns = [
+    --snip--
+    # Detail page for a single topic.
+    path('topics/&lt;int:topic_id&gt;/', views.topic,
+            name='topic'),
+]</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using data in a view</h3>
+                <p class="intro-text">The view uses a parameter from the URL to pull the correct data from the database. In this example the view is sending a context dictionary to the template, containing data that should be displayed on the page. You'll need to import any model you're using.</p>
+                <pre>def topic(request, topic_id):
+    """Show a topic and all its entries."""
+    topic = Topic.objects.get(id=topic_id)
+    entries = topic.entry_set.order_by(
+            '-date_added')
+    context = {
+        'topic': topic,
+        'entries': entries,
+    }
+    return render(request,
+            'learning_logs/topic.html', context)</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Using data in a template</h3>
+                <p class="intro-text">The data in the view function's context dictionary is available within the template. This data is accessed using template variables, which are indicated by doubled curly braces.
+                <br>The vertical line after a template variable indicates a filter. In this case a filter called date formats date objects, and the filter linebreaks renders paragraphs properly on a web page.</p>
+                <pre>{% extends 'learning_logs/base.html' %}
+
+{% block content %}
+
+  &lt;p&gt;Topic: {{ topic }}&lt;/p&gt;
+
+  &lt;p&gt;Entries:&lt;/p&gt;
+  &lt;ul&gt;
+    {% for entry in entries %}
+      &lt;li&gt;
+        &lt;p&gt;
+          {{ entry.date_added|date:'M d, Y H:i' }}
+        &lt;/p&gt;
+
+        &lt;p&gt;
+          {{ entry.text|linebreaks }}
+        &lt;/p&gt;
+      &lt;/li&gt;
+    {% empty %}
+      &lt;li&gt;There are no entries yet.&lt;/li&gt;
+    {% endfor %}
+  &lt;/ul&gt;
+
+{% endblock content %}</pre>
+            </div>
+        </section>
+
+        <!-- RESTARTING SERVER -->
+        <section id="restarting">
+            <h2 class="main-topic-header">Restarting the development server</h2>
+            <p class="intro-text">If you make a change to your project and the change doesn't seem to have any effect, try restarting the server:</p>
+            <pre>$ python manage.py runserver</pre>
+        </section>
+
+        <!-- THE SHELL -->
+        <section id="shell">
+            <h2 class="main-topic-header">The Django shell</h2>
+            <p class="intro-text">You can explore the data in your project from the command line. This is helpful for developing queries and testing code snippets.</p>
+            
+            <div class="subtopic">
+                <h3 class="subtopic-header">Start a shell session</h3>
+                <pre>$ python manage.py shell</pre>
+            </div>
+
+            <div class="subtopic">
+                <h3 class="subtopic-header">Access data from the project</h3>
+                <pre>>>> from learning_logs.models import Topic
+>>> Topic.objects.all()
+[&lt;Topic: Chess&gt;, &lt;Topic: Rock Climbing&gt;]
+>>> topic = Topic.objects.get(id=1)
+>>> topic.text
+'Chess'
+>>> topic.entry_set.all()
+&lt;QuerySet [&lt;Entry: In the opening phase...&gt;]&gt;</pre>
+            </div>
+        </section>
+
+        <!-- ONLINE RESOURCES -->
+        <section id="resources">
+            <h2 class="main-topic-header">Online resources</h2>
+            <p class="intro-text">The documentation for Django is available at docs.djangoproject.com/. The Django documentation is thorough and user-friendly, so check it out!</p>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navItems = document.querySelectorAll('#nav-list li');
+            const sections = document.querySelectorAll('main section');
+            const showAllBtn = document.getElementById('show-all-btn');
+
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const targetId = item.getAttribute('data-target');
+                    
+                    navItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+
+                    sections.forEach(section => {
+                        if (section.id === targetId) {
+                            section.classList.add('visible');
+                        } else {
+                            section.classList.remove('visible');
+                        }
+                    });
+
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            showAllBtn.addEventListener('click', () => {
+                navItems.forEach(i => i.classList.remove('active'));
+                sections.forEach(section => {
+                    section.classList.add('visible');
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+    <script src="../assets/theme.js"></script>
+</body>
+</html>
