@@ -1,1 +1,15 @@
 notes.txt
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# editor
+.vscode/
+.idea/
+*.swp
+
+# temp
+*.tmp
+*.log
